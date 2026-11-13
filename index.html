@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="es" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ConectaTrabajo - Expertos a Domicilio en Bolivia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        darkBg: '#121316',         /* Negro carbón suave */
+                        darkCard: '#1A1C21',       /* Gris pizarra muy oscuro */
+                        darkHeader: '#16181C',     /* Encabezado oscuro */
+                        pastelCream: '#F4F1EA',    /* Crema pastel para textos principales */
+                        pastelMuted: '#B8B5AD',    /* Gris cálido pastel para subtítulos */
+                        pastelBorder: '#2C2F36',   /* Bordes sutiles */
+                        pastelSage: '#98C9A3',     /* Verde salvia pastel (Acento principal) */
+                        pastelSageHover: '#82B88E',
+                        pastelPeach: '#F4A28C',    /* Melocotón pastel (Acento secundario) */
+                        pastelGold: '#F2D08A',     /* Amarillo mantequilla pastel */
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #121316;
+            color: #F4F1EA;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #1A1C21;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #2C2F36;
+            border-radius: 4px;
+        }
+        .glass-header {
+            background: rgba(22, 24, 28, 0.88);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="custom-scrollbar min-h-screen flex flex-col justify-between selection:bg-pastelSage selection:text-darkBg">
+
+    <!-- Header Navigation -->
+    <header class="glass-header sticky top-0 z-40 border-b border-pastelBorder transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#" class="flex items-center gap-3 group">
+                <div class="w-11 h-11 rounded-xl bg-pastelSage flex items-center justify-center text-darkBg text-xl shadow-lg shadow-pastelSage/15 group-hover:scale-105 transition-transform">
+                    <i class="fa-solid fa-handshake"></i>
+                </div>
+                <div>
+                    <span class="text-2xl font-extrabold tracking-tight text-pastelCream">Conecta<span class="text-pastelSage">Trabajo</span></span>
+                    <span class="block text-[10px] font-semibold text-pastelMuted uppercase tracking-widest -mt-1">Servicios Garantizados Bolivia</span>
+                </div>
+            </a>
+
+            <!-- Desktop Nav Links -->
+            <nav class="hidden md:flex items-center gap-8">
+                <a href="#profesionales" class="text-sm font-semibold text-pastelMuted hover:text-pastelSage transition-colors">Buscar Profesionales</a>
+                <a href="#como-funciona" class="text-sm font-semibold text-pastelMuted hover:text-pastelSage transition-colors">¿Cómo Funciona?</a>
+                <button onclick="openModal('solicitudModal')" class="text-sm font-semibold text-pastelCream hover:text-pastelPeach transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-pastelPeach"></i> Publicar Solicitud
+                </button>
+            </nav>
+
+            <!-- Action Buttons -->
+            <div class="hidden md:flex items-center gap-4">
+                <button onclick="openModal('registroModal')" class="bg-pastelSage hover:bg-pastelSageHover text-darkBg px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition-all hover:shadow-lg hover:shadow-pastelSage/20 flex items-center gap-2">
+                    <i class="fa-solid fa-user-plus"></i> Registrarse
+                </button>
+            </div>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-pastelCream hover:text-pastelSage focus:outline-none">
+                <i class="fa-solid fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileMenu" class="hidden md:hidden bg-darkCard border-b border-pastelBorder px-6 py-6 space-y-4">
+            <a href="#profesionales" onclick="toggleMobileMenu()" class="block text-base font-medium text-pastelCream hover:text-pastelSage">Buscar Profesionales</a>
+            <a href="#como-funciona" onclick="toggleMobileMenu()" class="block text-base font-medium text-pastelCream hover:text-pastelSage">¿Cómo Funciona?</a>
+            <button onclick="toggleMobileMenu(); openModal('solicitudModal')" class="w-full text-left text-base font-medium text-pastelPeach flex items-center gap-2">
+                <i class="fa-solid fa-paper-plane"></i> Publicar Solicitud
+            </button>
+            <div class="pt-4 border-t border-pastelBorder">
+                <button onclick="toggleMobileMenu(); openModal('registroModal')" class="w-full bg-pastelSage hover:bg-pastelSageHover text-darkBg py-3 rounded-xl font-bold text-center block">
+                    Registrarse como Profesional
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-gradient-to-b from-darkHeader to-darkBg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-darkCard border border-pastelBorder text-pastelGold text-xs md:text-sm font-semibold mb-6">
+                <i class="fa-solid fa-shield-halved text-pastelSage"></i> Red Nacional de Técnicos y Especialistas Verificados
+            </div>
+            
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-pastelCream tracking-tight leading-tight max-w-4xl mx-auto">
+                Servicios Técnicos y Oficios a Domicilio en Bolivia
+            </h1>
+            
+            <p class="mt-6 text-base sm:text-lg md:text-xl text-pastelMuted max-w-2xl mx-auto leading-relaxed">
+                Contacte directamente con profesionales calificados para el hogar en Cochabamba, Santa Cruz, La Paz, El Alto, Sucre, Tarija y más ciudades.
+            </p>
+
+            <!-- Search Panel -->
+            <div class="mt-10 max-w-4xl mx-auto bg-darkCard border border-pastelBorder rounded-2xl p-4 sm:p-6 shadow-2xl">
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Servicio Filter -->
+                    <div class="text-left">
+                        <label class="block text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Especialidad</label>
+                        <div class="relative">
+                            <select id="filterOficio" onchange="filtrar()" class="w-full bg-darkBg border border-pastelBorder rounded-xl px-4 py-3 text-pastelCream text-sm font-medium focus:outline-none focus:border-pastelSage appearance-none cursor-pointer">
+                                <option value="todos">Todas las especialidades</option>
+                                <option value="Electricista">Electricista</option>
+                                <option value="Plomero / Gasfíter">Plomero / Gasfíter</option>
+                                <option value="Técnico de Línea Blanca">Técnico de Línea Blanca</option>
+                                <option value="Albañil / Constructor">Albañil / Constructor</option>
+                                <option value="Cerrajero">Cerrajero</option>
+                                <option value="Pintor">Pintor</option>
+                                <option value="Jardinero">Jardinero</option>
+                                <option value="Carpintero">Carpintero</option>
+                                <option value="Limpieza Profunda">Limpieza Profunda</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-pastelMuted pointer-events-none text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- Ciudad Filter -->
+                    <div class="text-left">
+                        <label class="block text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Ciudad / Departamento</label>
+                        <div class="relative">
+                            <select id="filterCiudad" onchange="filtrar()" class="w-full bg-darkBg border border-pastelBorder rounded-xl px-4 py-3 text-pastelCream text-sm font-medium focus:outline-none focus:border-pastelSage appearance-none cursor-pointer">
+                                <option value="todas">Todas las ciudades</option>
+                                <option value="Cochabamba">Cochabamba</option>
+                                <option value="Santa Cruz">Santa Cruz</option>
+                                <option value="La Paz">La Paz</option>
+                                <option value="El Alto">El Alto</option>
+                                <option value="Sucre">Sucre</option>
+                                <option value="Tarija">Tarija</option>
+                                <option value="Oruro">Oruro</option>
+                                <option value="Potosí">Potosí</option>
+                            </select>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-pastelMuted pointer-events-none text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- Keyword Search -->
+                    <div class="text-left">
+                        <label class="block text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Búsqueda directa</label>
+                        <div class="relative">
+                            <input type="text" id="searchKeyword" oninput="filtrar()" placeholder="Ej. Fuga, Chapa, Calefón..." class="w-full bg-darkBg border border-pastelBorder rounded-xl px-4 py-3 text-pastelCream text-sm font-medium focus:outline-none focus:border-pastelSage placeholder-pastelMuted/50">
+                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-pastelMuted text-xs"></i>
+                        </div>
+                    </div>
+
+                    <!-- Action Button -->
+                    <div class="text-left flex flex-col justify-end">
+                        <button onclick="openModal('solicitudModal')" class="w-full bg-pastelPeach hover:opacity-90 text-darkBg py-3 px-4 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-paper-plane"></i> Crear Solicitud
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Price Slider & Quick Stats -->
+                <div class="mt-6 pt-4 border-t border-pastelBorder flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-pastelMuted">
+                    <div class="flex items-center gap-3 w-full sm:w-auto">
+                        <span>Costo máximo de visita técnica: <strong id="priceVal" class="text-pastelGold">100 Bs.</strong></span>
+                        <input type="range" id="priceRange" min="30" max="150" step="5" value="100" oninput="updatePrice(this.value)" class="accent-pastelSage cursor-pointer w-32">
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-pastelSage"></i> Documentación Verificada</span>
+                        <span class="flex items-center gap-1.5"><i class="fa-brands fa-whatsapp text-pastelSage"></i> Contacto Directo</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content Grid -->
+    <main id="profesionales" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
+        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
+            <div>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-pastelCream">Profesionales Disponibles</h2>
+                <p class="text-sm text-pastelMuted mt-1">Directorio actualizado con especialistas listos para atender emergencias y trabajos programados.</p>
+            </div>
+            <div id="counterBadge" class="bg-darkCard border border-pastelBorder px-4 py-2 rounded-xl text-xs font-bold text-pastelGold">
+                Cargando directorio...
+            </div>
+        </div>
+
+        <!-- Cards Container -->
+        <div id="gridProfesionales" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+            <!-- Renderizado dinámico vía JavaScript -->
+        </div>
+
+        <!-- Empty State -->
+        <div id="noResults" class="hidden text-center py-16 bg-darkCard border border-pastelBorder rounded-2xl">
+            <i class="fa-solid fa-user-slash text-4xl text-pastelMuted mb-4"></i>
+            <h3 class="text-lg font-bold text-pastelCream">No se encontraron profesionales con estos criterios</h3>
+            <p class="text-sm text-pastelMuted mt-2">Pruebe ajustando la ciudad o incrementando el rango de costo de visita.</p>
+            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-pastelSage text-darkBg font-bold text-xs rounded-xl hover:bg-pastelSageHover">
+                Restablecer Filtros
+            </button>
+        </div>
+    </main>
+
+    <!-- Modal: Detalle Profesional & Contacto por WhatsApp -->
+    <div id="profesionalModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-darkCard border border-pastelBorder rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col">
+            <button onclick="closeModal('profesionalModal')" class="absolute top-4 right-4 z-10 bg-darkBg/80 text-pastelMuted hover:text-white w-9 h-9 rounded-full flex items-center justify-center border border-pastelBorder transition-colors">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+
+            <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
+                <!-- Profile Header -->
+                <div class="flex items-center gap-4">
+                    <img id="mFoto" src="" alt="Foto de perfil" class="w-20 h-20 rounded-2xl object-cover border-2 border-pastelSage shadow-md">
+                    <div>
+                        <span id="mBadge" class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pastelSage/15 text-pastelSage border border-pastelSage/30 mb-1">
+                            <i class="fa-solid fa-shield-check"></i> Verificado
+                        </span>
+                        <h3 id="mNombre" class="text-xl font-bold text-pastelCream"></h3>
+                        <p id="mOficio" class="text-sm font-semibold text-pastelPeach"></p>
+                        <p id="mCiudad" class="text-xs text-pastelMuted mt-0.5 flex items-center gap-1">
+                            <i class="fa-solid fa-location-dot text-pastelSage"></i> <span></span>
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Bio & Ratings -->
+                <div class="grid grid-cols-2 gap-3 bg-darkBg p-3 rounded-xl border border-pastelBorder text-center">
+                    <div>
+                        <span class="block text-xs text-pastelMuted">Calificación</span>
+                        <span id="mRating" class="text-base font-extrabold text-pastelGold flex items-center justify-center gap-1 mt-0.5">
+                            <i class="fa-solid fa-star text-xs"></i> <span></span>
+                        </span>
+                    </div>
+                    <div>
+                        <span class="block text-xs text-pastelMuted">Visita Técnica</span>
+                        <span id="mPrecio" class="text-base font-extrabold text-pastelCream mt-0.5 block"></span>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Sobre el profesional</h4>
+                    <p id="mDesc" class="text-sm text-pastelCream leading-relaxed bg-darkBg/50 p-3 rounded-xl border border-pastelBorder/50"></p>
+                </div>
+
+                <!-- Formulario Directo de Solicitud vía WhatsApp -->
+                <div class="border-t border-pastelBorder pt-4">
+                    <h4 class="text-xs font-bold text-pastelMuted uppercase tracking-wider mb-3">Enviar mensaje directo por WhatsApp</h4>
+                    <form onsubmit="sendWhatsApp(event)" class="space-y-3">
+                        <div>
+                            <label class="block text-xs text-pastelMuted mb-1">Su nombre completo</label>
+                            <input type="text" id="wsCliente" required placeholder="Ej. Ana María Flores" class="w-full bg-darkBg border border-pastelBorder rounded-xl px-3 py-2 text-xs text-pastelCream focus:outline-none focus:border-pastelSage">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-pastelMuted mb-1">Zona o Barrio específico</label>
+                            <input type="text" id="wsZona" required placeholder="Ej. Zona Central / Av. Heroínas" class="w-full bg-darkBg border border-pastelBorder rounded-xl px-3 py-2 text-xs text-pastelCream focus:outline-none focus:border-pastelSage">
+                        </div>
+                        <div>
+                            <label class="block text-xs text-pastelMuted mb-1">Detalle del trabajo o falla</label>
+                            <textarea id="wsDetalle" rows="2" required placeholder="Describa brevemente lo que necesita reparar o instalar..." class="w-full bg-darkBg border border-pastelBorder rounded-xl px-3 py-2 text-xs text-pastelCream focus:outline-none focus:border-pastelSage resize-none"></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-pastelSage hover:bg-pastelSageHover text-darkBg py-3 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                            <i class="fa-brands fa-whatsapp text-lg"></i> Contactar por WhatsApp
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Publicar Solicitud General -->
+    <div id="solicitudModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-darkCard border border-pastelBorder rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button onclick="closeModal('solicitudModal')" class="absolute top-4 right-4 text-pastelMuted hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-xl font-bold text-pastelCream mb-1">Publicar Solicitud de Servicio</h3>
+            <p class="text-xs text-pastelMuted mb-4">Indique los detalles de lo que requiere para recibir propuestas de técnicos cercanos.</p>
+            
+            <form onsubmit="submitSolicitud(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-semibold text-pastelMuted mb-1">Servicio Requerido</label>
+                    <select id="solOficio" required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                        <option value="Electricista">Electricista</option>
+                        <option value="Plomero / Gasfíter">Plomero / Gasfíter</option>
+                        <option value="Técnico de Línea Blanca">Técnico de Línea Blanca</option>
+                        <option value="Albañil / Constructor">Albañil / Constructor</option>
+                        <option value="Cerrajero">Cerrajero</option>
+                        <option value="Pintor">Pintor</option>
+                        <option value="Jardinero">Jardinero</option>
+                        <option value="Carpintero">Carpintero</option>
+                        <option value="Limpieza Profunda">Limpieza Profunda</option>
+                    </select>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs font-semibold text-pastelMuted mb-1">Ciudad</label>
+                        <select id="solCiudad" required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                            <option value="Cochabamba">Cochabamba</option>
+                            <option value="Santa Cruz">Santa Cruz</option>
+                            <option value="La Paz">La Paz</option>
+                            <option value="El Alto">El Alto</option>
+                            <option value="Sucre">Sucre</option>
+                            <option value="Tarija">Tarija</option>
+                            <option value="Oruro">Oruro</option>
+                            <option value="Potosí">Potosí</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-pastelMuted mb-1">Presupuesto Referencial (Bs.)</label>
+                        <input type="number" id="solMonto" min="20" placeholder="Ej. 100" required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs font-semibold text-pastelMuted mb-1">Descripción del trabajo</label>
+                    <textarea id="solDesc" rows="3" required placeholder="Escriba los detalles de lo que requiere hacer en su inmueble..." class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream resize-none"></textarea>
+                </div>
+                <button type="submit" class="w-full bg-pastelPeach hover:opacity-90 text-darkBg py-3 rounded-xl font-bold text-xs uppercase tracking-wider">
+                    Enviar Solicitud
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: Registro de Profesional -->
+    <div id="registroModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-darkCard border border-pastelBorder rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeModal('registroModal')" class="absolute top-4 right-4 text-pastelMuted hover:text-white">
+                <i class="fa-solid fa-xmark text-xl"></i>
+            </button>
+            <h3 class="text-xl font-bold text-pastelCream mb-1">Registro de Maestro / Técnico</h3>
+            <p class="text-xs text-pastelMuted mb-4">Súmese a ConectaTrabajo y reciba solicitudes directas en su ciudad.</p>
+            
+            <form onsubmit="submitRegistro(event)" class="space-y-3">
+                <div>
+                    <label class="block text-xs text-pastelMuted mb-1">Nombre completo</label>
+                    <input type="text" required placeholder="Ej. Pedro Luis Mamani" class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-pastelMuted mb-1">Especialidad</label>
+                        <select required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                            <option value="Electricista">Electricista</option>
+                            <option value="Plomero / Gasfíter">Plomero / Gasfíter</option>
+                            <option value="Técnico de Línea Blanca">Técnico de Línea Blanca</option>
+                            <option value="Albañil / Constructor">Albañil / Constructor</option>
+                            <option value="Cerrajero">Cerrajero</option>
+                            <option value="Pintor">Pintor</option>
+                            <option value="Jardinero">Jardinero</option>
+                            <option value="Carpintero">Carpintero</option>
+                            <option value="Limpieza Profunda">Limpieza Profunda</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-pastelMuted mb-1">Ciudad Base</label>
+                        <select required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                            <option value="Cochabamba">Cochabamba</option>
+                            <option value="Santa Cruz">Santa Cruz</option>
+                            <option value="La Paz">La Paz</option>
+                            <option value="El Alto">El Alto</option>
+                            <option value="Sucre">Sucre</option>
+                            <option value="Tarija">Tarija</option>
+                            <option value="Oruro">Oruro</option>
+                            <option value="Potosí">Potosí</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-xs text-pastelMuted mb-1">Número de WhatsApp</label>
+                    <input type="tel" required placeholder="Ej. 71234567" class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                </div>
+                <div>
+                    <label class="block text-xs text-pastelMuted mb-1">Número de Carnet de Identidad (Para Verificación)</label>
+                    <input type="text" required placeholder="Ej. 6543210 CB" class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                </div>
+                <button type="submit" class="w-full bg-pastelSage hover:bg-pastelSageHover text-darkBg py-3 rounded-xl font-bold text-xs uppercase tracking-wider mt-2">
+                    Completar Registro
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Section How it Works -->
+    <section id="como-funciona" class="bg-darkHeader border-t border-b border-pastelBorder py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-12">
+                <h2 class="text-2xl font-extrabold text-pastelCream">¿Cómo funciona la plataforma?</h2>
+                <p class="text-sm text-pastelMuted mt-2">Paso a paso para contratar especialistas o brindar sus servicios en todo el territorio nacional.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-darkBg p-6 rounded-2xl border border-pastelBorder text-center">
+                    <div class="w-12 h-12 rounded-xl bg-pastelSage/15 text-pastelSage flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+                    <h3 class="text-base font-bold text-pastelCream mb-2">Seleccione Especialista</h3>
+                    <p class="text-xs text-pastelMuted leading-relaxed">Filtre por especialidad, ciudad y tarifa base. Revise las valoraciones de otros usuarios.</p>
+                </div>
+                <div class="bg-darkBg p-6 rounded-2xl border border-pastelBorder text-center">
+                    <div class="w-12 h-12 rounded-xl bg-pastelPeach/15 text-pastelPeach flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+                    <h3 class="text-base font-bold text-pastelCream mb-2">Acuerde por WhatsApp</h3>
+                    <p class="text-xs text-pastelMuted leading-relaxed">Envíe los detalles de su requerimiento directamente al teléfono del especialista sin intermediarios.</p>
+                </div>
+                <div class="bg-darkBg p-6 rounded-2xl border border-pastelBorder text-center">
+                    <div class="w-12 h-12 rounded-xl bg-pastelGold/15 text-pastelGold flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+                    <h3 class="text-base font-bold text-pastelCream mb-2">Servicio Realizado</h3>
+                    <p class="text-xs text-pastelMuted leading-relaxed">El técnico acude a su domicilio, realiza la inspección o reparación y usted abona el monto acordado.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-darkHeader py-10 border-t border-pastelBorder text-xs text-pastelMuted">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
+            <div class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg bg-pastelSage flex items-center justify-center text-darkBg text-xs font-bold">C</div>
+                <span class="font-bold text-pastelCream">ConectaTrabajo</span> &copy; 2026 - Conectando hogares y profesionales en Bolivia.
+            </div>
+            <div class="flex gap-6">
+                <a href="#" class="hover:text-pastelCream transition-colors">Términos de Servicio</a>
+                <a href="#" class="hover:text-pastelCream transition-colors">Política de Privacidad</a>
+                <a href="#" class="hover:text-pastelCream transition-colors">Centro de Ayuda</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript Data and Interactivity -->
+    <script>
+        // Base de Datos Ampliada con 21 Profesionales Reales
+        const profesionales = [
+            {
+                id: 1,
+                nombre: "Don Roberto Mendoza",
+                oficio: "Electricista",
+                ciudad: "Cochabamba",
+                zona: "Cala Cala / Queru Queru",
+                rating: 4.9,
+                trabajos: 142,
+                precio: 50,
+                telefono: "59171234567",
+                foto: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Electricista certificado con más de 15 años de experiencia. Especialista en cortocircuitos, instalación de tableros trifásicos y duchas automáticas."
+            },
+            {
+                id: 2,
+                nombre: "Marco Antonio Vargas",
+                oficio: "Plomero / Gasfíter",
+                ciudad: "Santa Cruz",
+                zona: "Equipetrol / Barrio Norte",
+                rating: 4.8,
+                trabajos: 98,
+                precio: 60,
+                telefono: "59172345678",
+                foto: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Instalación y reparación de tuberías de agua y gas. Detección de fugas no visibles con equipo digital y limpieza de tanques elevados."
+            },
+            {
+                id: 3,
+                nombre: "Ing. Juan Carlos Paz",
+                oficio: "Técnico de Línea Blanca",
+                ciudad: "La Paz",
+                zona: "Sopocachi / Zona Sur",
+                rating: 5.0,
+                trabajos: 210,
+                precio: 70,
+                telefono: "59173456789",
+                foto: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Reparación especializada de lavadoras, refrigeradores inverter, secadoras y microondas. Repuestos originales con garantía escrita."
+            },
+            {
+                id: 4,
+                nombre: "Maestro Gonzalo Mamani",
+                oficio: "Albañil / Constructor",
+                ciudad: "Cochabamba",
+                zona: "Quillacollo / Colcapirhua",
+                rating: 4.7,
+                trabajos: 75,
+                precio: 80,
+                telefono: "59174567890",
+                foto: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Construcción en general, colocado de pisos cerámicos, porcelanato, revoques en yeso y remodelación completa de baños y cocinas."
+            },
+            {
+                id: 5,
+                nombre: "Carlos Flores",
+                oficio: "Cerrajero",
+                ciudad: "Santa Cruz",
+                zona: "Centro / 1er a 4to Anillo",
+                rating: 4.9,
+                trabajos: 180,
+                precio: 50,
+                telefono: "59175678901",
+                foto: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Servicio de cerrajería urgente de 24 horas. Apertura de puertas de domicilio y vehículos sin daño, cambio de combinaciones y chapas de alta seguridad."
+            },
+            {
+                id: 6,
+                nombre: "Ramiro Quispe",
+                oficio: "Pintor",
+                ciudad: "Cochabamba",
+                zona: "Zona Central / Tupuraya",
+                rating: 4.8,
+                trabajos: 64,
+                precio: 45,
+                telefono: "59176789012",
+                foto: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Pintado de interiores y exteriores, empastado de muros, impermeabilización de techos y tratamiento contra la humedad de cimientos."
+            },
+            {
+                id: 7,
+                nombre: "Mateo Torrico",
+                oficio: "Jardinero",
+                ciudad: "Sucre",
+                zona: "Barrio Joven / Mesa Verde",
+                rating: 4.9,
+                trabajos: 52,
+                precio: 40,
+                telefono: "59177890123",
+                foto: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80",
+                verificado: false,
+                desc: "Mantenimiento de jardines, poda de árboles, diseño de paisajes, nivelado de césped y fumigación ecológica contra plagas domésticas."
+            },
+            {
+                id: 8,
+                nombre: "Don Basilio Gutiérrez",
+                oficio: "Carpintero",
+                ciudad: "Tarija",
+                zona: "El Molino / San Roque",
+                rating: 5.0,
+                trabajos: 115,
+                precio: 60,
+                telefono: "59178901234",
+                foto: "https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Fabricación y reparación de muebles en melamina y madera maciza. Ajuste de puertas, repisas a medida y restauración de roperos."
+            },
+            {
+                id: 9,
+                nombre: "Doña Martha Choque",
+                oficio: "Limpieza Profunda",
+                ciudad: "La Paz",
+                zona: "Achumani / Calacoto",
+                rating: 4.9,
+                trabajos: 130,
+                precio: 70,
+                telefono: "59179012345",
+                foto: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Limpieza profunda de casas, departamentos después de obras, desinfección de alfombras, colchones y lavado de tapices."
+            },
+            {
+                id: 10,
+                nombre: "Hernán Alarcón",
+                oficio: "Electricista",
+                ciudad: "El Alto",
+                zona: "Ciudad Satélite / Villa Adela",
+                rating: 4.7,
+                trabajos: 89,
+                precio: 40,
+                telefono: "59170123456",
+                foto: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Técnico electricista domiciliario e industrial. Instalación de luminarias LED, bombas de agua y acometidas de energía."
+            },
+            {
+                id: 11,
+                nombre: "Samuel Fernández",
+                oficio: "Plomero / Gasfíter",
+                ciudad: "La Paz",
+                zona: "Miraflores / Centro",
+                rating: 4.8,
+                trabajos: 105,
+                precio: 55,
+                telefono: "59171122334",
+                foto: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Especialista en instalación de calefones a gas, desobstrucción de cañerías con sonda eléctrica y reparación de tanques de agua."
+            },
+            {
+                id: 12,
+                nombre: "Víctor Hugo Soliz",
+                oficio: "Técnico de Línea Blanca",
+                ciudad: "Cochabamba",
+                zona: "Sarco / América Oeste",
+                rating: 4.9,
+                trabajos: 160,
+                precio: 60,
+                telefono: "59172233445",
+                foto: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Mantenimiento preventivo y correctivo de aire acondicionado, heladeras, congeladoras y cocinas industriales."
+            },
+            {
+                id: 13,
+                nombre: "Esteban Condori",
+                oficio: "Albañil / Constructor",
+                ciudad: "El Alto",
+                zona: "16 de Julio / Río Seco",
+                rating: 4.8,
+                trabajos: 92,
+                precio: 75,
+                telefono: "59173344556",
+                foto: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Experto en obra gruesa y fina, vaciado de losas, murallas perimetrales y techados de calamina con estructura metálica."
+            },
+            {
+                id: 14,
+                nombre: "Jorge Linares",
+                oficio: "Cerrajero",
+                ciudad: "Cochabamba",
+                zona: "Las Cuadras / Av. Oquendo",
+                rating: 4.9,
+                trabajos: 110,
+                precio: 45,
+                telefono: "59174455667",
+                foto: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Instalación de cerraduras digitales, candados de alta seguridad, duplicados de llaves con chip y reparación de portones."
+            },
+            {
+                id: 15,
+                nombre: "Álvaro Morales",
+                oficio: "Pintor",
+                ciudad: "Santa Cruz",
+                zona: "Urubó / Plan 3000",
+                rating: 4.7,
+                trabajos: 70,
+                precio: 50,
+                telefono: "59175566778",
+                foto: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80",
+                verificado: false,
+                desc: "Aplicación de pintura texturizada, grafiado, barnizado de estructuras de madera y pintura en altura para fachadas."
+            },
+            {
+                id: 16,
+                nombre: "Raúl Escalante",
+                oficio: "Carpintero",
+                ciudad: "Oruro",
+                zona: "Zona Central / Agua de Castilla",
+                rating: 4.8,
+                trabajos: 60,
+                precio: 50,
+                telefono: "59176677889",
+                foto: "https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Trabajos en madera para pisos parquet, cepillado, plastificado y construcción de mesones de cocina."
+            },
+            {
+                id: 17,
+                nombre: "Elena Zenteno",
+                oficio: "Limpieza Profunda",
+                ciudad: "Cochabamba",
+                zona: "Sarco / Av. Beccar",
+                rating: 5.0,
+                trabajos: 140,
+                precio: 60,
+                telefono: "59177788990",
+                foto: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Servicio de limpieza y desinfección integral para departamentos, oficinas e inmuebles comerciales."
+            },
+            {
+                id: 18,
+                nombre: "Gabriel Pinto",
+                oficio: "Jardinero",
+                ciudad: "Santa Cruz",
+                zona: "Zona Norte / Banzer",
+                rating: 4.9,
+                trabajos: 85,
+                precio: 50,
+                telefono: "59178899001",
+                foto: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Instalación de grama negra y sintética, sistemas de riego automático y poda de palmeras."
+            },
+            {
+                id: 19,
+                nombre: "Mario Claure",
+                oficio: "Electricista",
+                ciudad: "Tarija",
+                zona: "Las Panosas / Senac",
+                rating: 4.8,
+                trabajos: 95,
+                precio: 45,
+                telefono: "59179900112",
+                foto: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Instalaciones eléctricas residenciales, tableros de protección y diagnóstico de fugas de corriente."
+            },
+            {
+                id: 20,
+                nombre: "Sonia Mercado",
+                oficio: "Limpieza Profunda",
+                ciudad: "Potosí",
+                zona: "Centro Histórico / San Gerardo",
+                rating: 4.7,
+                trabajos: 48,
+                precio: 50,
+                telefono: "59170011223",
+                foto: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
+                verificado: false,
+                desc: "Limpieza de vidrios en altura, lavado de alfombras a vapor y sanitización de espacios."
+            },
+            {
+                id: 21,
+                nombre: "Felipe Cardozo",
+                oficio: "Plomero / Gasfíter",
+                ciudad: "Sucre",
+                zona: "Avenida Las Américas",
+                rating: 4.9,
+                trabajos: 77,
+                precio: 50,
+                telefono: "59171133445",
+                foto: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=600&q=80",
+                verificado: true,
+                desc: "Instalación de tanques de agua, tinacos, bombas centrífugas y desatascado de cañerías en general."
+            }
+        ];
+
+        let profesionalSeleccionado = null;
+
+        // Renderizar Tarjetas
+        function renderizarProfesionales(lista) {
+            const container = document.getElementById("gridProfesionales");
+            const counter = document.getElementById("counterBadge");
+            const noResults = document.getElementById("noResults");
+
+            if (!container || !counter || !noResults) return;
+
+            container.innerHTML = "";
+            counter.innerText = `${lista.length} Profesional${lista.length === 1 ? '' : 'es'} Encontrado${lista.length === 1 ? '' : 's'}`;
+
+            if (lista.length === 0) {
+                noResults.classList.remove("hidden");
+                return;
+            } else {
+                noResults.classList.add("hidden");
+            }
+
+            lista.forEach(p => {
+                const card = document.createElement("div");
+                card.className = "bg-darkCard border border-pastelBorder rounded-2xl overflow-hidden shadow-lg hover:border-pastelSage/60 transition-all duration-300 flex flex-col justify-between group";
+                
+                card.innerHTML = `
+                    <div>
+                        <!-- Header Image & Badge -->
+                        <div class="relative h-48 overflow-hidden bg-darkBg">
+                            <img src="${p.foto}" alt="${p.nombre}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80';" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
+                            <div class="absolute inset-0 bg-gradient-to-t from-darkCard via-transparent to-transparent"></div>
+                            
+                            ${p.verificado ? `
+                                <span class="absolute top-3 left-3 bg-darkBg/90 text-pastelSage text-[10px] font-bold px-2.5 py-1 rounded-full border border-pastelSage/40 backdrop-blur-md flex items-center gap-1 shadow">
+                                    <i class="fa-solid fa-shield-check"></i> Verificado SEGIP
+                                </span>
+                            ` : ''}
+
+                            <span class="absolute top-3 right-3 bg-darkBg/90 text-pastelGold text-xs font-bold px-2.5 py-1 rounded-full border border-pastelBorder backdrop-blur-md flex items-center gap-1">
+                                <i class="fa-solid fa-star"></i> ${p.rating}
+                            </span>
+                        </div>
+
+                        <!-- Card Body -->
+                        <div class="p-5">
+                            <h3 class="text-lg font-bold text-pastelCream group-hover:text-pastelSage transition-colors">${p.nombre}</h3>
+                            <p class="text-xs font-semibold text-pastelPeach mt-0.5">${p.oficio}</p>
+                            
+                            <p class="text-xs text-pastelMuted mt-2 flex items-center gap-1.5">
+                                <i class="fa-solid fa-location-dot text-pastelSage"></i> ${p.ciudad} (${p.zona})
+                            </p>
+
+                            <p class="text-xs text-pastelMuted/80 line-clamp-2 mt-3 leading-relaxed">
+                                ${p.desc}
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Card Footer -->
+                    <div class="px-5 py-4 bg-darkBg/50 border-t border-pastelBorder/60 flex items-center justify-between mt-2">
+                        <div>
+                            <span class="text-[10px] uppercase font-bold text-pastelMuted block">Visita técnica</span>
+                            <span class="text-sm font-extrabold text-pastelCream">Bs. ${p.precio}</span>
+                        </div>
+                        <button onclick="abrirDetalle(${p.id})" class="bg-pastelSage/15 hover:bg-pastelSage text-pastelSage hover:text-darkBg border border-pastelSage/40 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5">
+                            <i class="fa-brands fa-whatsapp text-sm"></i> Contactar
+                        </button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // Filtrado Dinámico
+        function filtrar() {
+            const oficioVal = document.getElementById("filterOficio").value;
+            const ciudadVal = document.getElementById("filterCiudad").value;
+            const keyword = document.getElementById("searchKeyword").value.toLowerCase().trim();
+            const maxPrice = parseInt(document.getElementById("priceRange").value);
+
+            const resultado = profesionales.filter(p => {
+                const matchOficio = (oficioVal === "todos" || p.oficio === oficioVal);
+                const matchCiudad = (ciudadVal === "todas" || p.ciudad === ciudadVal);
+                const matchPrice = p.precio <= maxPrice;
+                const matchKeyword = (
+                    p.nombre.toLowerCase().includes(keyword) ||
+                    p.oficio.toLowerCase().includes(keyword) ||
+                    p.zona.toLowerCase().includes(keyword) ||
+                    p.desc.toLowerCase().includes(keyword)
+                );
+
+                return matchOficio && matchCiudad && matchPrice && matchKeyword;
+            });
+
+            renderizarProfesionales(resultado);
+        }
+
+        function updatePrice(val) {
+            document.getElementById("priceVal").innerText = `${val} Bs.`;
+            filtrar();
+        }
+
+        function resetFilters() {
+            document.getElementById("filterOficio").value = "todos";
+            document.getElementById("filterCiudad").value = "todas";
+            document.getElementById("searchKeyword").value = "";
+            document.getElementById("priceRange").value = "100";
+            document.getElementById("priceVal").innerText = "100 Bs.";
+            filtrar();
+        }
+
+        // Modales y Detalles
+        function abrirDetalle(id) {
+            profesionalSeleccionado = profesionales.find(p => p.id === id);
+            if (!profesionalSeleccionado) return;
+
+            const modalImg = document.getElementById("mFoto");
+            modalImg.src = profesionalSeleccionado.foto;
+            modalImg.onerror = function() {
+                this.onerror = null;
+                this.src = "https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80";
+            };
+
+            document.getElementById("mNombre").innerText = profesionalSeleccionado.nombre;
+            document.getElementById("mOficio").innerText = profesionalSeleccionado.oficio;
+            document.getElementById("mCiudad").querySelector("span").innerText = `${profesionalSeleccionado.ciudad} (${profesionalSeleccionado.zona})`;
+            document.getElementById("mRating").querySelector("span").innerText = `${profesionalSeleccionado.rating} (${profesionalSeleccionado.trabajos} trabajos)`;
+            document.getElementById("mPrecio").innerText = `Bs. ${profesionalSeleccionado.precio}`;
+            document.getElementById("mDesc").innerText = profesionalSeleccionado.desc;
+
+            openModal('profesionalModal');
+        }
+
+        function sendWhatsApp(e) {
+            e.preventDefault();
+            if (!profesionalSeleccionado) return;
+
+            const cliente = document.getElementById("wsCliente").value;
+            const zona = document.getElementById("wsZona").value;
+            const detalle = document.getElementById("wsDetalle").value;
+
+            const mensaje = `Hola ${profesionalSeleccionado.nombre}, vi su perfil en ConectaTrabajo.%0A%0A` +
+                            `*Cliente:* ${cliente}%0A` +
+                            `*Ubicación:* ${zona} (${profesionalSeleccionado.ciudad})%0A` +
+                            `*Requerimiento:* ${detalle}%0A%0A` +
+                            `¿Tiene disponibilidad para realizar una visita técnica?`;
+
+            const url = `https://wa.me/${profesionalSeleccionado.telefono}?text=${mensaje}`;
+            window.open(url, '_blank');
+            closeModal('profesionalModal');
+        }
+
+        function submitSolicitud(e) {
+            e.preventDefault();
+            alert("Su solicitud ha sido publicada en ConectaTrabajo. Los técnicos disponibles en su área se contactarán a la brevedad.");
+            closeModal('solicitudModal');
+        }
+
+        function submitRegistro(e) {
+            e.preventDefault();
+            alert("Registro completado exitosamente. Su documentación será verificada en un plazo máximo de 24 horas.");
+            closeModal('registroModal');
+        }
+
+        function openModal(modalId) {
+            document.getElementById(modalId).classList.remove("hidden");
+        }
+
+        function closeModal(modalId) {
+            document.getElementById(modalId).classList.add("hidden");
+        }
+
+        function toggleMobileMenu() {
+            document.getElementById("mobileMenu").classList.toggle("hidden");
+        }
+
+        // Inicialización Segura
+        function inicializarDirectorio() {
+            if (typeof profesionales !== 'undefined' && profesionales.length > 0) {
+                renderizarProfesionales(profesionales);
+            }
+        }
+
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", inicializarDirectorio);
+        } else {
+            inicializarDirectorio();
+        }
+    </script>
+</body>
+</html>

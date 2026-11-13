@@ -229,9 +229,9 @@
         </div>
     </main>
 
-    <!-- Modal: Detalle Profesional & Contacto por WhatsApp -->
+    <!-- Modal: Detalle Profesional, Reseñas & Contacto por WhatsApp -->
     <div id="profesionalModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-darkCard border border-pastelBorder rounded-2xl max-w-lg w-full overflow-hidden shadow-2xl relative max-h-[90vh] flex flex-col">
+        <div class="bg-darkCard border border-pastelBorder rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl relative max-h-[92vh] flex flex-col">
             <button onclick="closeModal('profesionalModal')" class="absolute top-4 right-4 z-10 bg-darkBg/80 text-pastelMuted hover:text-white w-9 h-9 rounded-full flex items-center justify-center border border-pastelBorder transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
@@ -255,7 +255,7 @@
                 <!-- Bio & Ratings -->
                 <div class="grid grid-cols-2 gap-3 bg-darkBg p-3 rounded-xl border border-pastelBorder text-center">
                     <div>
-                        <span class="block text-xs text-pastelMuted">Calificación</span>
+                        <span class="block text-xs text-pastelMuted">Calificación General</span>
                         <span id="mRating" class="text-base font-extrabold text-pastelGold flex items-center justify-center gap-1 mt-0.5">
                             <i class="fa-solid fa-star text-xs"></i> <span></span>
                         </span>
@@ -269,6 +269,40 @@
                 <div>
                     <h4 class="text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Sobre el profesional</h4>
                     <p id="mDesc" class="text-sm text-pastelCream leading-relaxed bg-darkBg/50 p-3 rounded-xl border border-pastelBorder/50"></p>
+                </div>
+
+                <!-- Sección de Reseñas de Clientes -->
+                <div class="border-t border-pastelBorder pt-4">
+                    <div class="flex items-center justify-between mb-3">
+                        <h4 class="text-xs font-bold text-pastelMuted uppercase tracking-wider">Reseñas de Clientes</h4>
+                        <span id="mResenasCount" class="text-[11px] font-semibold text-pastelGold"></span>
+                    </div>
+
+                    <!-- Lista de Reseñas -->
+                    <div id="mResenasList" class="space-y-3 max-h-48 overflow-y-auto custom-scrollbar pr-1 mb-4">
+                        <!-- Renderizado dinámico -->
+                    </div>
+
+                    <!-- Formulario para dejar una nueva reseña -->
+                    <form onsubmit="agregarResena(event)" class="bg-darkBg/70 border border-pastelBorder rounded-xl p-3 space-y-2.5">
+                        <p class="text-[11px] font-bold text-pastelCream">Dejar una opinión sobre este servicio:</p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                            <input type="text" id="revAutor" required placeholder="Su nombre (Ej. Carlos M.)" class="bg-darkCard border border-pastelBorder rounded-lg px-2.5 py-1.5 text-xs text-pastelCream focus:outline-none focus:border-pastelSage">
+                            <select id="revPuntaje" class="bg-darkCard border border-pastelBorder rounded-lg px-2.5 py-1.5 text-xs text-pastelGold font-semibold focus:outline-none focus:border-pastelSage">
+                                <option value="5">★★★★★ (5 - Excelente servicio)</option>
+                                <option value="4">★★★★☆ (4 - Buen servicio)</option>
+                                <option value="3">★★★☆☆ (3 - Servicio regular)</option>
+                                <option value="2">★★☆☆☆ (2 - Mal servicio)</option>
+                                <option value="1">★☆☆☆☆ (1 - Muy mal servicio)</option>
+                            </select>
+                        </div>
+                        <div class="flex gap-2">
+                            <input type="text" id="revTexto" required placeholder="Escriba su experiencia con este técnico..." class="flex-grow bg-darkCard border border-pastelBorder rounded-lg px-2.5 py-1.5 text-xs text-pastelCream focus:outline-none focus:border-pastelSage">
+                            <button type="submit" class="bg-pastelGold text-darkBg hover:opacity-90 px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-opacity">
+                                Publicar
+                            </button>
+                        </div>
+                    </form>
                 </div>
 
                 <!-- Formulario Directo de Solicitud vía WhatsApp -->
@@ -420,7 +454,7 @@
                 <div class="bg-darkBg p-6 rounded-2xl border border-pastelBorder text-center">
                     <div class="w-12 h-12 rounded-xl bg-pastelSage/15 text-pastelSage flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
                     <h3 class="text-base font-bold text-pastelCream mb-2">Seleccione Especialista</h3>
-                    <p class="text-xs text-pastelMuted leading-relaxed">Filtre por especialidad, ciudad y tarifa base. Revise las valoraciones de otros usuarios.</p>
+                    <p class="text-xs text-pastelMuted leading-relaxed">Filtre por especialidad, ciudad y tarifa base. Revise las valoraciones y reseñas de otros usuarios.</p>
                 </div>
                 <div class="bg-darkBg p-6 rounded-2xl border border-pastelBorder text-center">
                     <div class="w-12 h-12 rounded-xl bg-pastelPeach/15 text-pastelPeach flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
@@ -453,7 +487,7 @@
 
     <!-- JavaScript Data and Interactivity -->
     <script>
-        // Base de Datos Ampliada con 21 Profesionales Reales
+        // Base de Datos Ampliada con 21 Profesionales Reales y Reseñas Intercaladas (Buenas y Malas)
         const profesionales = [
             {
                 id: 1,
@@ -467,7 +501,11 @@
                 telefono: "59171234567",
                 foto: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Electricista certificado con más de 15 años de experiencia. Especialista en cortocircuitos, instalación de tableros trifásicos y duchas automáticas."
+                desc: "Electricista certificado con más de 15 años de experiencia. Especialista en cortocircuitos, instalación de tableros trifásicos y duchas automáticas.",
+                resenas: [
+                    { autor: "Lucía Arze", puntaje: 5, fecha: "Hace 3 días", tipo: "bueno", comentario: "Muy buen servicio. Encontró el cortocircuito en 15 minutos y dejó todo ordenado y seguro." },
+                    { autor: "Jorge Camacho", puntaje: 2, fecha: "Hace 2 semanas", tipo: "malo", comentario: "Mal servicio en puntualidad, llegó casi una hora después de la hora acordada aunque el arreglo quedó bien." }
+                ]
             },
             {
                 id: 2,
@@ -481,7 +519,11 @@
                 telefono: "59172345678",
                 foto: "https://images.unsplash.com/photo-1585704032915-c3400ca199e7?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Instalación y reparación de tuberías de agua y gas. Detección de fugas no visibles con equipo digital y limpieza de tanques elevados."
+                desc: "Instalación y reparación de tuberías de agua y gas. Detección de fugas no visibles con equipo digital y limpieza de tanques elevados.",
+                resenas: [
+                    { autor: "Patricia Justiniano", puntaje: 2, fecha: "Hace 5 días", tipo: "malo", comentario: "Mal servicio, me cobró más de lo indicado inicialmente por los repuestos y dejó sucio el baño." },
+                    { autor: "Fernando Roca", puntaje: 5, fecha: "Hace 1 mes", tipo: "bueno", comentario: "Buen servicio, detectó una fuga subterránea sin tener que romper todo el patio." }
+                ]
             },
             {
                 id: 3,
@@ -495,7 +537,11 @@
                 telefono: "59173456789",
                 foto: "https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Reparación especializada de lavadoras, refrigeradores inverter, secadoras y microondas. Repuestos originales con garantía escrita."
+                desc: "Reparación especializada de lavadoras, refrigeradores inverter, secadoras y microondas. Repuestos originales con garantía escrita.",
+                resenas: [
+                    { autor: "Mariana Loayza", puntaje: 5, fecha: "Hace 4 días", tipo: "bueno", comentario: "Excelente y muy buen servicio, mi refrigerador volvió a enfriar como nuevo y me dio garantía escrita." },
+                    { autor: "Rodrigo Aliaga", puntaje: 3, fecha: "Hace 3 semanas", tipo: "malo", comentario: "Tardó dos días en conseguir el repuesto de la lavadora, la atención fue algo apurada." }
+                ]
             },
             {
                 id: 4,
@@ -509,7 +555,11 @@
                 telefono: "59174567890",
                 foto: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Construcción en general, colocado de pisos cerámicos, porcelanato, revoques en yeso y remodelación completa de baños y cocinas."
+                desc: "Construcción en general, colocado de pisos cerámicos, porcelanato, revoques en yeso y remodelación completa de baños y cocinas.",
+                resenas: [
+                    { autor: "Héctor Villarroel", puntaje: 1, fecha: "Hace 1 semana", tipo: "malo", comentario: "Mal servicio, dejó la obra a medias durante tres días sin avisar y tuve que insistir para que termine." },
+                    { autor: "Carmen Siles", puntaje: 5, fecha: "Hace 1 mes", tipo: "bueno", comentario: "Muy buen servicio en el colocado de porcelanato, las juntas quedaron muy prolijas." }
+                ]
             },
             {
                 id: 5,
@@ -523,7 +573,11 @@
                 telefono: "59175678901",
                 foto: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Servicio de cerrajería urgente de 24 horas. Apertura de puertas de domicilio y vehículos sin daño, cambio de combinaciones y chapas de alta seguridad."
+                desc: "Servicio de cerrajería urgente de 24 horas. Apertura de puertas de domicilio y vehículos sin daño, cambio de combinaciones y chapas de alta seguridad.",
+                resenas: [
+                    { autor: "Andrea Banegas", puntaje: 5, fecha: "Ayer", tipo: "bueno", comentario: "Buen servicio, llegó en 20 minutos de noche y abrió la puerta sin dañar la madera." },
+                    { autor: "Luis Miguel Saucedo", puntaje: 2, fecha: "Hace 2 semanas", tipo: "malo", comentario: "La copia de la llave que me entregó se trababa al principio, tuve que llamarlo de nuevo para que la lime." }
+                ]
             },
             {
                 id: 6,
@@ -537,7 +591,11 @@
                 telefono: "59176789012",
                 foto: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Pintado de interiores y exteriores, empastado de muros, impermeabilización de techos y tratamiento contra la humedad de cimientos."
+                desc: "Pintado de interiores y exteriores, empastado de muros, impermeabilización de techos y tratamiento contra la humedad de cimientos.",
+                resenas: [
+                    { autor: "Sofía Torrico", puntaje: 2, fecha: "Hace 6 días", tipo: "malo", comentario: "Mal servicio de limpieza al terminar, dejó manchas de pintura en el zócalo de madera." },
+                    { autor: "Daniela Orellana", puntaje: 5, fecha: "Hace 3 semanas", tipo: "bueno", comentario: "Muy buen servicio, eliminó por completo la humedad de la pared de la sala." }
+                ]
             },
             {
                 id: 7,
@@ -551,7 +609,11 @@
                 telefono: "59177890123",
                 foto: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80",
                 verificado: false,
-                desc: "Mantenimiento de jardines, poda de árboles, diseño de paisajes, nivelado de césped y fumigación ecológica contra plagas domésticas."
+                desc: "Mantenimiento de jardines, poda de árboles, diseño de paisajes, nivelado de césped y fumigación ecológica contra plagas domésticas.",
+                resenas: [
+                    { autor: "Valeria Mendoza", puntaje: 5, fecha: "Hace 4 días", tipo: "bueno", comentario: "Buen servicio, podó todos los arbustos y se llevó las bolsas con ramas." },
+                    { autor: "Óscar Caballero", puntaje: 2, fecha: "Hace 1 mes", tipo: "malo", comentario: "No trajo todas sus herramientas el primer día y tuvo que volver al día siguiente." }
+                ]
             },
             {
                 id: 8,
@@ -565,7 +627,11 @@
                 telefono: "59178901234",
                 foto: "https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Fabricación y reparación de muebles en melamina y madera maciza. Ajuste de puertas, repisas a medida y restauración de roperos."
+                desc: "Fabricación y reparación de muebles en melamina y madera maciza. Ajuste de puertas, repisas a medida y restauración de roperos.",
+                resenas: [
+                    { autor: "Gustavo Aparicio", puntaje: 1, fecha: "Hace 1 semana", tipo: "malo", comentario: "Mal servicio en tiempos de entrega, se retrasó una semana completa para entregar un ropero." },
+                    { autor: "Elena Castellanos", puntaje: 5, fecha: "Hace 2 semanas", tipo: "bueno", comentario: "Excelente acabado en madera y muy buen servicio, ajustó todas las puertas de la casa." }
+                ]
             },
             {
                 id: 9,
@@ -579,7 +645,11 @@
                 telefono: "59179012345",
                 foto: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Limpieza profunda de casas, departamentos después de obras, desinfección de alfombras, colchones y lavado de tapices."
+                desc: "Limpieza profunda de casas, departamentos después de obras, desinfección de alfombras, colchones y lavado de tapices.",
+                resenas: [
+                    { autor: "Carla Peñaranda", puntaje: 5, fecha: "Hace 2 días", tipo: "bueno", comentario: "Muy buen servicio, dejaron el departamento impecable después de la refacción." },
+                    { autor: "Mauricio Terán", puntaje: 2, fecha: "Hace 3 semanas", tipo: "malo", comentario: "Faltó limpiar bien los rieles de las ventanas, tuve que pedirles que repasaran." }
+                ]
             },
             {
                 id: 10,
@@ -593,7 +663,11 @@
                 telefono: "59170123456",
                 foto: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Técnico electricista domiciliario e industrial. Instalación de luminarias LED, bombas de agua y acometidas de energía."
+                desc: "Técnico electricista domiciliario e industrial. Instalación de luminarias LED, bombas de agua y acometidas de energía.",
+                resenas: [
+                    { autor: "Wilmer Quispe", puntaje: 2, fecha: "Hace 5 días", tipo: "malo", comentario: "Mal servicio de diagnóstico inicial, me hizo comprar un térmico que no era necesario." },
+                    { autor: "Roxana Mamani", puntaje: 5, fecha: "Hace 2 semanas", tipo: "bueno", comentario: "Buen servicio y precio justo por instalar todas las luces LED de la tienda." }
+                ]
             },
             {
                 id: 11,
@@ -607,7 +681,11 @@
                 telefono: "59171122334",
                 foto: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Especialista en instalación de calefones a gas, desobstrucción de cañerías con sonda eléctrica y reparación de tanques de agua."
+                desc: "Especialista en instalación de calefones a gas, desobstrucción de cañerías con sonda eléctrica y reparación de tanques de agua.",
+                resenas: [
+                    { autor: "Javier Murillo", puntaje: 5, fecha: "Hace 3 días", tipo: "bueno", comentario: "Buen servicio, dejó funcionando el calefón a la perfección y revisó que no hubiera fugas." },
+                    { autor: "Beatriz Salgado", puntaje: 2, fecha: "Hace 1 mes", tipo: "malo", comentario: "No contestaba los mensajes para confirmar la visita, llegó recién al día siguiente." }
+                ]
             },
             {
                 id: 12,
@@ -621,7 +699,11 @@
                 telefono: "59172233445",
                 foto: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Mantenimiento preventivo y correctivo de aire acondicionado, heladeras, congeladoras y cocinas industriales."
+                desc: "Mantenimiento preventivo y correctivo de aire acondicionado, heladeras, congeladoras y cocinas industriales.",
+                resenas: [
+                    { autor: "Natalia Guzmán", puntaje: 1, fecha: "Hace 1 semana", tipo: "malo", comentario: "Mal servicio, cobró la visita técnica pero no tenía la herramienta para medir el gas en ese momento." },
+                    { autor: "Alejandro Pinto", puntaje: 5, fecha: "Hace 3 semanas", tipo: "bueno", comentario: "Muy buen servicio con el mantenimiento de dos equipos de aire acondicionado." }
+                ]
             },
             {
                 id: 13,
@@ -635,7 +717,11 @@
                 telefono: "59173344556",
                 foto: "https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Experto en obra gruesa y fina, vaciado de losas, murallas perimetrales y techados de calamina con estructura metálica."
+                desc: "Experto en obra gruesa y fina, vaciado de losas, murallas perimetrales y techados de calamina con estructura metálica.",
+                resenas: [
+                    { autor: "Rolando Choque", puntaje: 5, fecha: "Hace 4 días", tipo: "bueno", comentario: "Buen servicio, levantó la muralla rápido y con buen nivel." },
+                    { autor: "Sonia Ticona", puntaje: 2, fecha: "Hace 2 semanas", tipo: "malo", comentario: "Calculó mal la cantidad de cemento y tuvimos que comprar material extra de urgencia." }
+                ]
             },
             {
                 id: 14,
@@ -649,7 +735,11 @@
                 telefono: "59174455667",
                 foto: "https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Instalación de cerraduras digitales, candados de alta seguridad, duplicados de llaves con chip y reparación de portones."
+                desc: "Instalación de cerraduras digitales, candados de alta seguridad, duplicados de llaves con chip y reparación de portones.",
+                resenas: [
+                    { autor: "Mónica Dávalos", puntaje: 2, fecha: "Hace 6 días", tipo: "malo", comentario: "Mal servicio postventa, la chapa digital quedó algo suelta y tardó días en volver a ajustarla." },
+                    { autor: "Cristian Vargas", puntaje: 5, fecha: "Hace 3 semanas", tipo: "bueno", comentario: "Muy buen servicio, solucionó el problema del portón eléctrico en una sola visita." }
+                ]
             },
             {
                 id: 15,
@@ -663,7 +753,11 @@
                 telefono: "59175566778",
                 foto: "https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=80",
                 verificado: false,
-                desc: "Aplicación de pintura texturizada, grafiado, barnizado de estructuras de madera y pintura en altura para fachadas."
+                desc: "Aplicación de pintura texturizada, grafiado, barnizado de estructuras de madera y pintura en altura para fachadas.",
+                resenas: [
+                    { autor: "Diego Chávez", puntaje: 5, fecha: "Hace 3 días", tipo: "bueno", comentario: "Buen servicio, el barnizado de las puertas exteriores quedó brillante y parejo." },
+                    { autor: "Camila Ribera", puntaje: 2, fecha: "Hace 1 mes", tipo: "malo", comentario: "No cubrió bien los muebles antes de lijar y dejó bastante polvo en la sala." }
+                ]
             },
             {
                 id: 16,
@@ -677,7 +771,11 @@
                 telefono: "59176677889",
                 foto: "https://images.unsplash.com/photo-1601058268499-e52658b8bb88?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Trabajos en madera para pisos parquet, cepillado, plastificado y construcción de mesones de cocina."
+                desc: "Trabajos en madera para pisos parquet, cepillado, plastificado y construcción de mesones de cocina.",
+                resenas: [
+                    { autor: "Fabiola Flores", puntaje: 1, fecha: "Hace 1 semana", tipo: "malo", comentario: "Mal servicio, el olor del plastificado fue muy fuerte porque no ventiló bien el ambiente como prometió." },
+                    { autor: "Ernesto Ramírez", puntaje: 5, fecha: "Hace 3 semanas", tipo: "bueno", comentario: "Muy buen servicio, el piso parquet quedó renovado por completo." }
+                ]
             },
             {
                 id: 17,
@@ -691,7 +789,11 @@
                 telefono: "59177788990",
                 foto: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Servicio de limpieza y desinfección integral para departamentos, oficinas e inmuebles comerciales."
+                desc: "Servicio de limpieza y desinfección integral para departamentos, oficinas e inmuebles comerciales.",
+                resenas: [
+                    { autor: "Paola Ugarte", puntaje: 5, fecha: "Hace 2 días", tipo: "bueno", comentario: "Buen servicio, muy puntuales y trajeron todos sus insumos de desinfección." },
+                    { autor: "Sergio Antezana", puntaje: 3, fecha: "Hace 1 mes", tipo: "malo", comentario: "El trabajo en cocina fue bueno, pero olvidaron limpiar la parte superior de los estantes." }
+                ]
             },
             {
                 id: 18,
@@ -705,7 +807,11 @@
                 telefono: "59178899001",
                 foto: "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Instalación de grama negra y sintética, sistemas de riego automático y poda de palmeras."
+                desc: "Instalación de grama negra y sintética, sistemas de riego automático y poda de palmeras.",
+                resenas: [
+                    { autor: "Lorena Vaca", puntaje: 2, fecha: "Hace 5 días", tipo: "malo", comentario: "Mal servicio en el riego automático, uno de los aspersores quedó mal calibrado y mojaba la pared." },
+                    { autor: "Andrés Ortiz", puntaje: 5, fecha: "Hace 2 semanas", tipo: "bueno", comentario: "Muy buen servicio podando las palmeras altas sin dañar el techo." }
+                ]
             },
             {
                 id: 19,
@@ -719,7 +825,11 @@
                 telefono: "59179900112",
                 foto: "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Instalaciones eléctricas residenciales, tableros de protección y diagnóstico de fugas de corriente."
+                desc: "Instalaciones eléctricas residenciales, tableros de protección y diagnóstico de fugas de corriente.",
+                resenas: [
+                    { autor: "Ximena Aguirre", puntaje: 5, fecha: "Hace 4 días", tipo: "bueno", comentario: "Buen servicio, ordenó todo el cableado antiguo del tablero principal." },
+                    { autor: "Pablo Zamora", puntaje: 2, fecha: "Hace 3 semanas", tipo: "malo", comentario: "Cobró un extra por el traslado que no mencionó por teléfono." }
+                ]
             },
             {
                 id: 20,
@@ -733,7 +843,11 @@
                 telefono: "59170011223",
                 foto: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=600&q=80",
                 verificado: false,
-                desc: "Limpieza de vidrios en altura, lavado de alfombras a vapor y sanitización de espacios."
+                desc: "Limpieza de vidrios en altura, lavado de alfombras a vapor y sanitización de espacios.",
+                resenas: [
+                    { autor: "Raquel Llanos", puntaje: 1, fecha: "Hace 1 semana", tipo: "malo", comentario: "Mal servicio con la alfombra, quedó muy húmeda y tardó casi tres días en secar." },
+                    { autor: "Gonzalo Barrios", puntaje: 5, fecha: "Hace 2 semanas", tipo: "bueno", comentario: "Buen servicio en la limpieza de ventanales altos de la oficina." }
+                ]
             },
             {
                 id: 21,
@@ -747,7 +861,11 @@
                 telefono: "59171133445",
                 foto: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?auto=format&fit=crop&w=600&q=80",
                 verificado: true,
-                desc: "Instalación de tanques de agua, tinacos, bombas centrífugas y desatascado de cañerías en general."
+                desc: "Instalación de tanques de agua, tinacos, bombas centrífugas y desatascado de cañerías en general.",
+                resenas: [
+                    { autor: "Adriana Salinas", puntaje: 5, fecha: "Hace 3 días", tipo: "bueno", comentario: "Muy buen servicio, instaló el automático de la bomba de agua y funciona sin problemas." },
+                    { autor: "Nelson Urioste", puntaje: 2, fecha: "Hace 1 mes", tipo: "malo", comentario: "Tuvo que volver al día siguiente porque quedó goteando una unión del tinaco." }
+                ]
             }
         ];
 
@@ -775,6 +893,8 @@
                 const card = document.createElement("div");
                 card.className = "bg-darkCard border border-pastelBorder rounded-2xl overflow-hidden shadow-lg hover:border-pastelSage/60 transition-all duration-300 flex flex-col justify-between group";
                 
+                const ultimaResena = p.resenas && p.resenas.length > 0 ? p.resenas[0] : null;
+
                 card.innerHTML = `
                     <div>
                         <!-- Header Image & Badge -->
@@ -805,6 +925,13 @@
                             <p class="text-xs text-pastelMuted/80 line-clamp-2 mt-3 leading-relaxed">
                                 ${p.desc}
                             </p>
+
+                            ${ultimaResena ? `
+                                <div class="mt-3 pt-2.5 border-t border-pastelBorder/50 text-[11px] text-pastelMuted flex items-start gap-2">
+                                    <i class="fa-solid ${ultimaResena.puntaje >= 4 ? 'fa-thumbs-up text-pastelSage' : 'fa-thumbs-down text-pastelPeach'} mt-0.5"></i>
+                                    <span class="line-clamp-1 italic">"${ultimaResena.comentario}"</span>
+                                </div>
+                            ` : ''}
                         </div>
                     </div>
 
@@ -815,12 +942,82 @@
                             <span class="text-sm font-extrabold text-pastelCream">Bs. ${p.precio}</span>
                         </div>
                         <button onclick="abrirDetalle(${p.id})" class="bg-pastelSage/15 hover:bg-pastelSage text-pastelSage hover:text-darkBg border border-pastelSage/40 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5">
-                            <i class="fa-brands fa-whatsapp text-sm"></i> Contactar
+                            <i class="fa-solid fa-comments text-sm"></i> Ver y Contactar
                         </button>
                     </div>
                 `;
                 container.appendChild(card);
             });
+        }
+
+        // Renderizar Lista de Reseñas en el Modal
+        function renderizarResenasModal(profesional) {
+            const listaEl = document.getElementById("mResenasList");
+            const countEl = document.getElementById("mResenasCount");
+            if (!listaEl || !countEl) return;
+
+            const resenas = profesional.resenas || [];
+            countEl.innerText = `${resenas.length} opinión${resenas.length === 1 ? '' : 'es'}`;
+            listaEl.innerHTML = "";
+
+            if (resenas.length === 0) {
+                listaEl.innerHTML = `<p class="text-xs text-pastelMuted italic">Aún no hay reseñas escritas para este profesional.</p>`;
+                return;
+            }
+
+            resenas.forEach(r => {
+                const esBuena = r.puntaje >= 4;
+                const estrellas = "★".repeat(r.puntaje) + "☆".repeat(5 - r.puntaje);
+                const item = document.createElement("div");
+                item.className = `p-3 rounded-xl border ${esBuena ? 'bg-pastelSage/5 border-pastelSage/25' : 'bg-pastelPeach/5 border-pastelPeach/25'} text-xs`;
+
+                item.innerHTML = `
+                    <div class="flex items-center justify-between mb-1">
+                        <div class="flex items-center gap-2">
+                            <span class="font-bold text-pastelCream">${r.autor}</span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${esBuena ? 'bg-pastelSage/20 text-pastelSage' : 'bg-pastelPeach/20 text-pastelPeach'}">
+                                ${esBuena ? 'Buen servicio' : 'Mal servicio'}
+                            </span>
+                        </div>
+                        <span class="text-[10px] text-pastelMuted">${r.fecha}</span>
+                    </div>
+                    <div class="text-pastelGold text-[11px] mb-1">${estrellas}</div>
+                    <p class="text-pastelCream/90 leading-relaxed">${r.comentario}</p>
+                `;
+                listaEl.appendChild(item);
+            });
+        }
+
+        // Agregar Nueva Reseña desde el Modal
+        function agregarResena(e) {
+            e.preventDefault();
+            if (!profesionalSeleccionado) return;
+
+            const autorInput = document.getElementById("revAutor");
+            const puntajeInput = document.getElementById("revPuntaje");
+            const textoInput = document.getElementById("revTexto");
+
+            const nuevaResena = {
+                autor: autorInput.value.trim(),
+                puntaje: parseInt(puntajeInput.value),
+                fecha: "Ahora mismo",
+                tipo: parseInt(puntajeInput.value) >= 4 ? "bueno" : "malo",
+                comentario: textoInput.value.trim()
+            };
+
+            profesionalSeleccionado.resenas.unshift(nuevaResena);
+            
+            // Recalcular promedio simple
+            const suma = profesionalSeleccionado.resenas.reduce((acc, item) => acc + item.puntaje, 0);
+            profesionalSeleccionado.rating = (suma / profesionalSeleccionado.resenas.length).toFixed(1);
+
+            document.getElementById("mRating").querySelector("span").innerText = `${profesionalSeleccionado.rating} (${profesionalSeleccionado.trabajos} trabajos)`;
+            renderizarResenasModal(profesionalSeleccionado);
+            filtrar(); // Actualizar tarjeta en el fondo
+
+            autorInput.value = "";
+            textoInput.value = "";
+            puntajeInput.value = "5";
         }
 
         // Filtrado Dinámico
@@ -880,6 +1077,7 @@
             document.getElementById("mPrecio").innerText = `Bs. ${profesionalSeleccionado.precio}`;
             document.getElementById("mDesc").innerText = profesionalSeleccionado.desc;
 
+            renderizarResenasModal(profesionalSeleccionado);
             openModal('profesionalModal');
         }
 

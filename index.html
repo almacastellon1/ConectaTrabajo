@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,20 +13,22 @@
     
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     colors: {
-                        darkBg: '#121316',         /* Negro carbón suave */
-                        darkCard: '#1A1C21',       /* Gris pizarra muy oscuro */
-                        darkHeader: '#16181C',     /* Encabezado oscuro */
-                        pastelCream: '#F4F1EA',    /* Crema pastel para textos principales */
-                        pastelMuted: '#B8B5AD',    /* Gris cálido pastel para subtítulos */
-                        pastelBorder: '#2C2F36',   /* Bordes sutiles */
-                        pastelSage: '#98C9A3',     /* Verde salvia pastel (Acento principal) */
-                        pastelSageHover: '#82B88E',
-                        pastelPeach: '#F4A28C',    /* Melocotón pastel (Acento secundario) */
-                        pastelGold: '#F2D08A',     /* Amarillo mantequilla pastel */
+                        ivoryBg: '#FAF7F2',          /* Fondo principal marfil cálido */
+                        creamCard: '#FFFFFF',        /* Tarjetas blanco puro limpio */
+                        creamSoft: '#F3EDE2',        /* Crema suave para secciones y cajas internas */
+                        creamHeader: '#FAF7F2',      /* Encabezado marfil */
+                        inkDark: '#26231F',          /* Texto principal carbón cálido */
+                        inkMuted: '#6E675F',         /* Texto secundario piedra cálido */
+                        creamBorder: '#E5DEC9',      /* Bordes crema suaves */
+                        pastelSage: '#6BA37A',       /* Verde salvia pastel equilibrado para fondo claro */
+                        pastelSageLight: '#E8F3EB',  /* Fondo suave verde pastel */
+                        pastelSageHover: '#588E66',
+                        pastelRed: '#E07A68',        /* Rojo/coral pastel suave */
+                        pastelRedLight: '#FCECE9',   /* Fondo suave rojo pastel */
+                        pastelGold: '#D49B35',       /* Dorado cálido para estrellas */
                     },
                     fontFamily: {
                         sans: ['Plus Jakarta Sans', 'sans-serif'],
@@ -37,8 +39,8 @@
     </script>
     <style>
         body {
-            background-color: #121316;
-            color: #F4F1EA;
+            background-color: #FAF7F2;
+            color: #26231F;
             font-family: 'Plus Jakarta Sans', sans-serif;
             overflow-x: hidden;
         }
@@ -46,66 +48,66 @@
             width: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-            background: #1A1C21;
+            background: #F3EDE2;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: #2C2F36;
+            background: #D6CEBC;
             border-radius: 4px;
         }
         .glass-header {
-            background: rgba(22, 24, 28, 0.88);
+            background: rgba(250, 247, 242, 0.92);
             backdrop-filter: blur(12px);
             -webkit-backdrop-filter: blur(12px);
         }
     </style>
 </head>
-<body class="custom-scrollbar min-h-screen flex flex-col justify-between selection:bg-pastelSage selection:text-darkBg">
+<body class="custom-scrollbar min-h-screen flex flex-col justify-between selection:bg-pastelSage selection:text-white">
 
     <!-- Header Navigation -->
-    <header class="glass-header sticky top-0 z-40 border-b border-pastelBorder transition-all duration-300">
+    <header class="glass-header sticky top-0 z-40 border-b border-creamBorder transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
             <!-- Brand Logo -->
             <a href="#" class="flex items-center gap-3 group">
-                <div class="w-11 h-11 rounded-xl bg-pastelSage flex items-center justify-center text-darkBg text-xl shadow-lg shadow-pastelSage/15 group-hover:scale-105 transition-transform">
+                <div class="w-11 h-11 rounded-xl bg-pastelSage flex items-center justify-center text-white text-xl shadow-md shadow-pastelSage/25 group-hover:scale-105 transition-transform">
                     <i class="fa-solid fa-handshake"></i>
                 </div>
                 <div>
-                    <span class="text-2xl font-extrabold tracking-tight text-pastelCream">Conecta<span class="text-pastelSage">Trabajo</span></span>
-                    <span class="block text-[10px] font-semibold text-pastelMuted uppercase tracking-widest -mt-1">Servicios Garantizados Bolivia</span>
+                    <span class="text-2xl font-extrabold tracking-tight text-inkDark">Conecta<span class="text-pastelSage">Trabajo</span></span>
+                    <span class="block text-[10px] font-semibold text-inkMuted uppercase tracking-widest -mt-1">Servicios Garantizados Bolivia</span>
                 </div>
             </a>
 
             <!-- Desktop Nav Links -->
             <nav class="hidden md:flex items-center gap-8">
-                <a href="#profesionales" class="text-sm font-semibold text-pastelMuted hover:text-pastelSage transition-colors">Buscar Profesionales</a>
-                <a href="#como-funciona" class="text-sm font-semibold text-pastelMuted hover:text-pastelSage transition-colors">¿Cómo Funciona?</a>
-                <button onclick="openModal('solicitudModal')" class="text-sm font-semibold text-pastelCream hover:text-pastelPeach transition-colors flex items-center gap-2">
-                    <i class="fa-solid fa-paper-plane text-pastelPeach"></i> Publicar Solicitud
+                <a href="#profesionales" class="text-sm font-semibold text-inkMuted hover:text-pastelSage transition-colors">Buscar Profesionales</a>
+                <a href="#como-funciona" class="text-sm font-semibold text-inkMuted hover:text-pastelSage transition-colors">¿Cómo Funciona?</a>
+                <button onclick="openModal('solicitudModal')" class="text-sm font-semibold text-inkDark hover:text-pastelRed transition-colors flex items-center gap-2">
+                    <i class="fa-solid fa-paper-plane text-pastelRed"></i> Publicar Solicitud
                 </button>
             </nav>
 
             <!-- Action Buttons -->
             <div class="hidden md:flex items-center gap-4">
-                <button onclick="openModal('registroModal')" class="bg-pastelSage hover:bg-pastelSageHover text-darkBg px-5 py-2.5 rounded-xl font-bold text-sm shadow-md transition-all hover:shadow-lg hover:shadow-pastelSage/20 flex items-center gap-2">
+                <button onclick="openModal('registroModal')" class="bg-pastelSage hover:bg-pastelSageHover text-white px-5 py-2.5 rounded-xl font-bold text-sm shadow-sm transition-all hover:shadow-md hover:shadow-pastelSage/25 flex items-center gap-2">
                     <i class="fa-solid fa-user-plus"></i> Registrarse
                 </button>
             </div>
 
             <!-- Mobile Menu Toggle -->
-            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-pastelCream hover:text-pastelSage focus:outline-none">
+            <button onclick="toggleMobileMenu()" class="md:hidden p-2 text-inkDark hover:text-pastelSage focus:outline-none">
                 <i class="fa-solid fa-bars text-2xl"></i>
             </button>
         </div>
 
         <!-- Mobile Drawer -->
-        <div id="mobileMenu" class="hidden md:hidden bg-darkCard border-b border-pastelBorder px-6 py-6 space-y-4">
-            <a href="#profesionales" onclick="toggleMobileMenu()" class="block text-base font-medium text-pastelCream hover:text-pastelSage">Buscar Profesionales</a>
-            <a href="#como-funciona" onclick="toggleMobileMenu()" class="block text-base font-medium text-pastelCream hover:text-pastelSage">¿Cómo Funciona?</a>
-            <button onclick="toggleMobileMenu(); openModal('solicitudModal')" class="w-full text-left text-base font-medium text-pastelPeach flex items-center gap-2">
+        <div id="mobileMenu" class="hidden md:hidden bg-creamCard border-b border-creamBorder px-6 py-6 space-y-4 shadow-lg">
+            <a href="#profesionales" onclick="toggleMobileMenu()" class="block text-base font-medium text-inkDark hover:text-pastelSage">Buscar Profesionales</a>
+            <a href="#como-funciona" onclick="toggleMobileMenu()" class="block text-base font-medium text-inkDark hover:text-pastelSage">¿Cómo Funciona?</a>
+            <button onclick="toggleMobileMenu(); openModal('solicitudModal')" class="w-full text-left text-base font-medium text-pastelRed flex items-center gap-2">
                 <i class="fa-solid fa-paper-plane"></i> Publicar Solicitud
             </button>
-            <div class="pt-4 border-t border-pastelBorder">
-                <button onclick="toggleMobileMenu(); openModal('registroModal')" class="w-full bg-pastelSage hover:bg-pastelSageHover text-darkBg py-3 rounded-xl font-bold text-center block">
+            <div class="pt-4 border-t border-creamBorder">
+                <button onclick="toggleMobileMenu(); openModal('registroModal')" class="w-full bg-pastelSage hover:bg-pastelSageHover text-white py-3 rounded-xl font-bold text-center block">
                     Registrarse como Profesional
                 </button>
             </div>
@@ -113,28 +115,28 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative pt-12 pb-20 md:pt-20 md:pb-28 overflow-hidden bg-gradient-to-b from-darkHeader to-darkBg">
+    <section class="relative pt-12 pb-20 md:pt-20 md:pb-24 overflow-hidden bg-gradient-to-b from-creamSoft/80 to-ivoryBg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-darkCard border border-pastelBorder text-pastelGold text-xs md:text-sm font-semibold mb-6">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-creamCard border border-creamBorder text-inkDark text-xs md:text-sm font-semibold mb-6 shadow-sm">
                 <i class="fa-solid fa-shield-halved text-pastelSage"></i> Red Nacional de Técnicos y Especialistas Verificados
             </div>
             
-            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-pastelCream tracking-tight leading-tight max-w-4xl mx-auto">
+            <h1 class="text-3xl sm:text-5xl md:text-6xl font-extrabold text-inkDark tracking-tight leading-tight max-w-4xl mx-auto">
                 Servicios Técnicos y Oficios a Domicilio en Bolivia
             </h1>
             
-            <p class="mt-6 text-base sm:text-lg md:text-xl text-pastelMuted max-w-2xl mx-auto leading-relaxed">
+            <p class="mt-6 text-base sm:text-lg md:text-xl text-inkMuted max-w-2xl mx-auto leading-relaxed">
                 Contacte directamente con profesionales calificados para el hogar en Cochabamba, Santa Cruz, La Paz, El Alto, Sucre, Tarija y más ciudades.
             </p>
 
             <!-- Search Panel -->
-            <div class="mt-10 max-w-4xl mx-auto bg-darkCard border border-pastelBorder rounded-2xl p-4 sm:p-6 shadow-2xl">
+            <div class="mt-10 max-w-4xl mx-auto bg-creamCard border border-creamBorder rounded-2xl p-4 sm:p-6 shadow-xl shadow-stone-300/30">
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <!-- Servicio Filter -->
                     <div class="text-left">
-                        <label class="block text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Especialidad</label>
+                        <label class="block text-xs font-bold text-inkMuted uppercase tracking-wider mb-2">Especialidad</label>
                         <div class="relative">
-                            <select id="filterOficio" onchange="filtrar()" class="w-full bg-darkBg border border-pastelBorder rounded-xl px-4 py-3 text-pastelCream text-sm font-medium focus:outline-none focus:border-pastelSage appearance-none cursor-pointer">
+                            <select id="filterOficio" onchange="filtrar()" class="w-full bg-ivoryBg border border-creamBorder rounded-xl px-4 py-3 text-inkDark text-sm font-medium focus:outline-none focus:border-pastelSage appearance-none cursor-pointer">
                                 <option value="todos">Todas las especialidades</option>
                                 <option value="Electricista">Electricista</option>
                                 <option value="Plomero / Gasfíter">Plomero / Gasfíter</option>
@@ -146,15 +148,15 @@
                                 <option value="Carpintero">Carpintero</option>
                                 <option value="Limpieza Profunda">Limpieza Profunda</option>
                             </select>
-                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-pastelMuted pointer-events-none text-xs"></i>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-inkMuted pointer-events-none text-xs"></i>
                         </div>
                     </div>
 
                     <!-- Ciudad Filter -->
                     <div class="text-left">
-                        <label class="block text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Ciudad / Departamento</label>
+                        <label class="block text-xs font-bold text-inkMuted uppercase tracking-wider mb-2">Ciudad / Departamento</label>
                         <div class="relative">
-                            <select id="filterCiudad" onchange="filtrar()" class="w-full bg-darkBg border border-pastelBorder rounded-xl px-4 py-3 text-pastelCream text-sm font-medium focus:outline-none focus:border-pastelSage appearance-none cursor-pointer">
+                            <select id="filterCiudad" onchange="filtrar()" class="w-full bg-ivoryBg border border-creamBorder rounded-xl px-4 py-3 text-inkDark text-sm font-medium focus:outline-none focus:border-pastelSage appearance-none cursor-pointer">
                                 <option value="todas">Todas las ciudades</option>
                                 <option value="Cochabamba">Cochabamba</option>
                                 <option value="Santa Cruz">Santa Cruz</option>
@@ -165,36 +167,36 @@
                                 <option value="Oruro">Oruro</option>
                                 <option value="Potosí">Potosí</option>
                             </select>
-                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-pastelMuted pointer-events-none text-xs"></i>
+                            <i class="fa-solid fa-chevron-down absolute right-4 top-1/2 -translate-y-1/2 text-inkMuted pointer-events-none text-xs"></i>
                         </div>
                     </div>
 
                     <!-- Keyword Search -->
                     <div class="text-left">
-                        <label class="block text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Búsqueda directa</label>
+                        <label class="block text-xs font-bold text-inkMuted uppercase tracking-wider mb-2">Búsqueda directa</label>
                         <div class="relative">
-                            <input type="text" id="searchKeyword" oninput="filtrar()" placeholder="Ej. Fuga, Chapa, Calefón..." class="w-full bg-darkBg border border-pastelBorder rounded-xl px-4 py-3 text-pastelCream text-sm font-medium focus:outline-none focus:border-pastelSage placeholder-pastelMuted/50">
-                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-pastelMuted text-xs"></i>
+                            <input type="text" id="searchKeyword" oninput="filtrar()" placeholder="Ej. Fuga, Chapa, Calefón..." class="w-full bg-ivoryBg border border-creamBorder rounded-xl px-4 py-3 text-inkDark text-sm font-medium focus:outline-none focus:border-pastelSage placeholder-inkMuted/60">
+                            <i class="fa-solid fa-magnifying-glass absolute right-4 top-1/2 -translate-y-1/2 text-inkMuted text-xs"></i>
                         </div>
                     </div>
 
                     <!-- Action Button -->
                     <div class="text-left flex flex-col justify-end">
-                        <button onclick="openModal('solicitudModal')" class="w-full bg-pastelPeach hover:opacity-90 text-darkBg py-3 px-4 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                        <button onclick="openModal('solicitudModal')" class="w-full bg-pastelRed hover:opacity-90 text-white py-3 px-4 rounded-xl font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2">
                             <i class="fa-solid fa-paper-plane"></i> Crear Solicitud
                         </button>
                     </div>
                 </div>
 
                 <!-- Price Slider & Quick Stats -->
-                <div class="mt-6 pt-4 border-t border-pastelBorder flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-pastelMuted">
+                <div class="mt-6 pt-4 border-t border-creamBorder flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-inkMuted">
                     <div class="flex items-center gap-3 w-full sm:w-auto">
-                        <span>Costo máximo de visita técnica: <strong id="priceVal" class="text-pastelGold">100 Bs.</strong></span>
+                        <span>Costo máximo de visita técnica: <strong id="priceVal" class="text-pastelSage font-extrabold">100 Bs.</strong></span>
                         <input type="range" id="priceRange" min="30" max="150" step="5" value="100" oninput="updatePrice(this.value)" class="accent-pastelSage cursor-pointer w-32">
                     </div>
                     <div class="flex items-center gap-4">
-                        <span class="flex items-center gap-1.5"><i class="fa-solid fa-circle-check text-pastelSage"></i> Documentación Verificada</span>
-                        <span class="flex items-center gap-1.5"><i class="fa-brands fa-whatsapp text-pastelSage"></i> Contacto Directo</span>
+                        <span class="flex items-center gap-1.5 font-medium"><i class="fa-solid fa-circle-check text-pastelSage"></i> Documentación Verificada</span>
+                        <span class="flex items-center gap-1.5 font-medium"><i class="fa-brands fa-whatsapp text-pastelSage"></i> Contacto Directo</span>
                     </div>
                 </div>
             </div>
@@ -205,10 +207,10 @@
     <main id="profesionales" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow">
         <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 mb-8">
             <div>
-                <h2 class="text-2xl sm:text-3xl font-extrabold text-pastelCream">Profesionales Disponibles</h2>
-                <p class="text-sm text-pastelMuted mt-1">Directorio actualizado con especialistas listos para atender emergencias y trabajos programados.</p>
+                <h2 class="text-2xl sm:text-3xl font-extrabold text-inkDark">Profesionales Disponibles</h2>
+                <p class="text-sm text-inkMuted mt-1">Directorio actualizado con especialistas listos para atender emergencias y trabajos programados.</p>
             </div>
-            <div id="counterBadge" class="bg-darkCard border border-pastelBorder px-4 py-2 rounded-xl text-xs font-bold text-pastelGold">
+            <div id="counterBadge" class="bg-pastelSageLight border border-pastelSage/30 px-4 py-2 rounded-xl text-xs font-bold text-pastelSage">
                 Cargando directorio...
             </div>
         </div>
@@ -219,63 +221,63 @@
         </div>
 
         <!-- Empty State -->
-        <div id="noResults" class="hidden text-center py-16 bg-darkCard border border-pastelBorder rounded-2xl">
-            <i class="fa-solid fa-user-slash text-4xl text-pastelMuted mb-4"></i>
-            <h3 class="text-lg font-bold text-pastelCream">No se encontraron profesionales con estos criterios</h3>
-            <p class="text-sm text-pastelMuted mt-2">Pruebe ajustando la ciudad o incrementando el rango de costo de visita.</p>
-            <button onclick="resetFilters()" class="mt-4 px-4 py-2 bg-pastelSage text-darkBg font-bold text-xs rounded-xl hover:bg-pastelSageHover">
+        <div id="noResults" class="hidden text-center py-16 bg-creamCard border border-creamBorder rounded-2xl shadow-sm">
+            <i class="fa-solid fa-user-slash text-4xl text-inkMuted mb-4"></i>
+            <h3 class="text-lg font-bold text-inkDark">No se encontraron profesionales con estos criterios</h3>
+            <p class="text-sm text-inkMuted mt-2">Pruebe ajustando la ciudad o incrementando el rango de costo de visita.</p>
+            <button onclick="resetFilters()" class="mt-4 px-5 py-2.5 bg-pastelSage text-white font-bold text-xs rounded-xl hover:bg-pastelSageHover shadow-sm">
                 Restablecer Filtros
             </button>
         </div>
     </main>
 
     <!-- Modal: Detalle Profesional, Reseñas & Contacto por WhatsApp -->
-    <div id="profesionalModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-darkCard border border-pastelBorder rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl relative max-h-[92vh] flex flex-col">
-            <button onclick="closeModal('profesionalModal')" class="absolute top-4 right-4 z-10 bg-darkBg/80 text-pastelMuted hover:text-white w-9 h-9 rounded-full flex items-center justify-center border border-pastelBorder transition-colors">
+    <div id="profesionalModal" class="fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-creamCard border border-creamBorder rounded-2xl max-w-xl w-full overflow-hidden shadow-2xl relative max-h-[92vh] flex flex-col">
+            <button onclick="closeModal('profesionalModal')" class="absolute top-4 right-4 z-10 bg-ivoryBg text-inkMuted hover:text-inkDark w-9 h-9 rounded-full flex items-center justify-center border border-creamBorder transition-colors">
                 <i class="fa-solid fa-xmark"></i>
             </button>
 
             <div class="p-6 overflow-y-auto custom-scrollbar space-y-6">
                 <!-- Profile Header -->
                 <div class="flex items-center gap-4">
-                    <img id="mFoto" src="" alt="Foto de perfil" class="w-20 h-20 rounded-2xl object-cover border-2 border-pastelSage shadow-md">
+                    <img id="mFoto" src="" alt="Foto de perfil" class="w-20 h-20 rounded-2xl object-cover border-2 border-pastelSage shadow-sm">
                     <div>
-                        <span id="mBadge" class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pastelSage/15 text-pastelSage border border-pastelSage/30 mb-1">
+                        <span id="mBadge" class="inline-block px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-pastelSageLight text-pastelSage border border-pastelSage/30 mb-1">
                             <i class="fa-solid fa-shield-check"></i> Verificado
                         </span>
-                        <h3 id="mNombre" class="text-xl font-bold text-pastelCream"></h3>
-                        <p id="mOficio" class="text-sm font-semibold text-pastelPeach"></p>
-                        <p id="mCiudad" class="text-xs text-pastelMuted mt-0.5 flex items-center gap-1">
+                        <h3 id="mNombre" class="text-xl font-bold text-inkDark"></h3>
+                        <p id="mOficio" class="text-sm font-semibold text-pastelRed"></p>
+                        <p id="mCiudad" class="text-xs text-inkMuted mt-0.5 flex items-center gap-1">
                             <i class="fa-solid fa-location-dot text-pastelSage"></i> <span></span>
                         </p>
                     </div>
                 </div>
 
                 <!-- Bio & Ratings -->
-                <div class="grid grid-cols-2 gap-3 bg-darkBg p-3 rounded-xl border border-pastelBorder text-center">
+                <div class="grid grid-cols-2 gap-3 bg-ivoryBg p-3 rounded-xl border border-creamBorder text-center">
                     <div>
-                        <span class="block text-xs text-pastelMuted">Calificación General</span>
+                        <span class="block text-xs text-inkMuted">Calificación General</span>
                         <span id="mRating" class="text-base font-extrabold text-pastelGold flex items-center justify-center gap-1 mt-0.5">
                             <i class="fa-solid fa-star text-xs"></i> <span></span>
                         </span>
                     </div>
                     <div>
-                        <span class="block text-xs text-pastelMuted">Visita Técnica</span>
-                        <span id="mPrecio" class="text-base font-extrabold text-pastelCream mt-0.5 block"></span>
+                        <span class="block text-xs text-inkMuted">Visita Técnica</span>
+                        <span id="mPrecio" class="text-base font-extrabold text-inkDark mt-0.5 block"></span>
                     </div>
                 </div>
 
                 <div>
-                    <h4 class="text-xs font-bold text-pastelMuted uppercase tracking-wider mb-2">Sobre el profesional</h4>
-                    <p id="mDesc" class="text-sm text-pastelCream leading-relaxed bg-darkBg/50 p-3 rounded-xl border border-pastelBorder/50"></p>
+                    <h4 class="text-xs font-bold text-inkMuted uppercase tracking-wider mb-2">Sobre el profesional</h4>
+                    <p id="mDesc" class="text-sm text-inkDark leading-relaxed bg-ivoryBg/70 p-3.5 rounded-xl border border-creamBorder"></p>
                 </div>
 
                 <!-- Sección de Reseñas de Clientes -->
-                <div class="border-t border-pastelBorder pt-4">
+                <div class="border-t border-creamBorder pt-4">
                     <div class="flex items-center justify-between mb-3">
-                        <h4 class="text-xs font-bold text-pastelMuted uppercase tracking-wider">Reseñas de Clientes</h4>
-                        <span id="mResenasCount" class="text-[11px] font-semibold text-pastelGold"></span>
+                        <h4 class="text-xs font-bold text-inkMuted uppercase tracking-wider">Reseñas de Clientes</h4>
+                        <span id="mResenasCount" class="text-[11px] font-bold text-pastelSage"></span>
                     </div>
 
                     <!-- Lista de Reseñas -->
@@ -284,11 +286,11 @@
                     </div>
 
                     <!-- Formulario para dejar una nueva reseña -->
-                    <form onsubmit="agregarResena(event)" class="bg-darkBg/70 border border-pastelBorder rounded-xl p-3 space-y-2.5">
-                        <p class="text-[11px] font-bold text-pastelCream">Dejar una opinión sobre este servicio:</p>
+                    <form onsubmit="agregarResena(event)" class="bg-ivoryBg border border-creamBorder rounded-xl p-3.5 space-y-2.5">
+                        <p class="text-[11px] font-bold text-inkDark">Dejar una opinión sobre este servicio:</p>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                            <input type="text" id="revAutor" required placeholder="Su nombre (Ej. Carlos M.)" class="bg-darkCard border border-pastelBorder rounded-lg px-2.5 py-1.5 text-xs text-pastelCream focus:outline-none focus:border-pastelSage">
-                            <select id="revPuntaje" class="bg-darkCard border border-pastelBorder rounded-lg px-2.5 py-1.5 text-xs text-pastelGold font-semibold focus:outline-none focus:border-pastelSage">
+                            <input type="text" id="revAutor" required placeholder="Su nombre (Ej. Carlos M.)" class="bg-creamCard border border-creamBorder rounded-lg px-2.5 py-1.5 text-xs text-inkDark focus:outline-none focus:border-pastelSage">
+                            <select id="revPuntaje" class="bg-creamCard border border-creamBorder rounded-lg px-2.5 py-1.5 text-xs text-inkDark font-semibold focus:outline-none focus:border-pastelSage">
                                 <option value="5">★★★★★ (5 - Excelente servicio)</option>
                                 <option value="4">★★★★☆ (4 - Buen servicio)</option>
                                 <option value="3">★★★☆☆ (3 - Servicio regular)</option>
@@ -297,8 +299,8 @@
                             </select>
                         </div>
                         <div class="flex gap-2">
-                            <input type="text" id="revTexto" required placeholder="Escriba su experiencia con este técnico..." class="flex-grow bg-darkCard border border-pastelBorder rounded-lg px-2.5 py-1.5 text-xs text-pastelCream focus:outline-none focus:border-pastelSage">
-                            <button type="submit" class="bg-pastelGold text-darkBg hover:opacity-90 px-3 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-opacity">
+                            <input type="text" id="revTexto" required placeholder="Escriba su experiencia con este técnico..." class="flex-grow bg-creamCard border border-creamBorder rounded-lg px-2.5 py-1.5 text-xs text-inkDark focus:outline-none focus:border-pastelSage">
+                            <button type="submit" class="bg-pastelRed text-white hover:opacity-90 px-3.5 py-1.5 rounded-lg text-xs font-bold whitespace-nowrap transition-opacity shadow-sm">
                                 Publicar
                             </button>
                         </div>
@@ -306,22 +308,22 @@
                 </div>
 
                 <!-- Formulario Directo de Solicitud vía WhatsApp -->
-                <div class="border-t border-pastelBorder pt-4">
-                    <h4 class="text-xs font-bold text-pastelMuted uppercase tracking-wider mb-3">Enviar mensaje directo por WhatsApp</h4>
+                <div class="border-t border-creamBorder pt-4">
+                    <h4 class="text-xs font-bold text-inkMuted uppercase tracking-wider mb-3">Enviar mensaje directo por WhatsApp</h4>
                     <form onsubmit="sendWhatsApp(event)" class="space-y-3">
                         <div>
-                            <label class="block text-xs text-pastelMuted mb-1">Su nombre completo</label>
-                            <input type="text" id="wsCliente" required placeholder="Ej. Ana María Flores" class="w-full bg-darkBg border border-pastelBorder rounded-xl px-3 py-2 text-xs text-pastelCream focus:outline-none focus:border-pastelSage">
+                            <label class="block text-xs text-inkMuted mb-1 font-medium">Su nombre completo</label>
+                            <input type="text" id="wsCliente" required placeholder="Ej. Ana María Flores" class="w-full bg-ivoryBg border border-creamBorder rounded-xl px-3 py-2 text-xs text-inkDark focus:outline-none focus:border-pastelSage">
                         </div>
                         <div>
-                            <label class="block text-xs text-pastelMuted mb-1">Zona o Barrio específico</label>
-                            <input type="text" id="wsZona" required placeholder="Ej. Zona Central / Av. Heroínas" class="w-full bg-darkBg border border-pastelBorder rounded-xl px-3 py-2 text-xs text-pastelCream focus:outline-none focus:border-pastelSage">
+                            <label class="block text-xs text-inkMuted mb-1 font-medium">Zona o Barrio específico</label>
+                            <input type="text" id="wsZona" required placeholder="Ej. Zona Central / Av. Heroínas" class="w-full bg-ivoryBg border border-creamBorder rounded-xl px-3 py-2 text-xs text-inkDark focus:outline-none focus:border-pastelSage">
                         </div>
                         <div>
-                            <label class="block text-xs text-pastelMuted mb-1">Detalle del trabajo o falla</label>
-                            <textarea id="wsDetalle" rows="2" required placeholder="Describa brevemente lo que necesita reparar o instalar..." class="w-full bg-darkBg border border-pastelBorder rounded-xl px-3 py-2 text-xs text-pastelCream focus:outline-none focus:border-pastelSage resize-none"></textarea>
+                            <label class="block text-xs text-inkMuted mb-1 font-medium">Detalle del trabajo o falla</label>
+                            <textarea id="wsDetalle" rows="2" required placeholder="Describa brevemente lo que necesita reparar o instalar..." class="w-full bg-ivoryBg border border-creamBorder rounded-xl px-3 py-2 text-xs text-inkDark focus:outline-none focus:border-pastelSage resize-none"></textarea>
                         </div>
-                        <button type="submit" class="w-full bg-pastelSage hover:bg-pastelSageHover text-darkBg py-3 rounded-xl font-bold text-sm shadow-md transition-all flex items-center justify-center gap-2">
+                        <button type="submit" class="w-full bg-pastelSage hover:bg-pastelSageHover text-white py-3 rounded-xl font-bold text-sm shadow-sm transition-all flex items-center justify-center gap-2">
                             <i class="fa-brands fa-whatsapp text-lg"></i> Contactar por WhatsApp
                         </button>
                     </form>
@@ -331,18 +333,18 @@
     </div>
 
     <!-- Modal: Publicar Solicitud General -->
-    <div id="solicitudModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-darkCard border border-pastelBorder rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
-            <button onclick="closeModal('solicitudModal')" class="absolute top-4 right-4 text-pastelMuted hover:text-white">
+    <div id="solicitudModal" class="fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-creamCard border border-creamBorder rounded-2xl max-w-lg w-full p-6 shadow-2xl relative">
+            <button onclick="closeModal('solicitudModal')" class="absolute top-4 right-4 text-inkMuted hover:text-inkDark">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-            <h3 class="text-xl font-bold text-pastelCream mb-1">Publicar Solicitud de Servicio</h3>
-            <p class="text-xs text-pastelMuted mb-4">Indique los detalles de lo que requiere para recibir propuestas de técnicos cercanos.</p>
+            <h3 class="text-xl font-bold text-inkDark mb-1">Publicar Solicitud de Servicio</h3>
+            <p class="text-xs text-inkMuted mb-4">Indique los detalles de lo que requiere para recibir propuestas de técnicos cercanos.</p>
             
             <form onsubmit="submitSolicitud(event)" class="space-y-4">
                 <div>
-                    <label class="block text-xs font-semibold text-pastelMuted mb-1">Servicio Requerido</label>
-                    <select id="solOficio" required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                    <label class="block text-xs font-semibold text-inkMuted mb-1">Servicio Requerido</label>
+                    <select id="solOficio" required class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark">
                         <option value="Electricista">Electricista</option>
                         <option value="Plomero / Gasfíter">Plomero / Gasfíter</option>
                         <option value="Técnico de Línea Blanca">Técnico de Línea Blanca</option>
@@ -356,8 +358,8 @@
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs font-semibold text-pastelMuted mb-1">Ciudad</label>
-                        <select id="solCiudad" required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                        <label class="block text-xs font-semibold text-inkMuted mb-1">Ciudad</label>
+                        <select id="solCiudad" required class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark">
                             <option value="Cochabamba">Cochabamba</option>
                             <option value="Santa Cruz">Santa Cruz</option>
                             <option value="La Paz">La Paz</option>
@@ -369,15 +371,15 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs font-semibold text-pastelMuted mb-1">Presupuesto Referencial (Bs.)</label>
-                        <input type="number" id="solMonto" min="20" placeholder="Ej. 100" required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                        <label class="block text-xs font-semibold text-inkMuted mb-1">Presupuesto Referencial (Bs.)</label>
+                        <input type="number" id="solMonto" min="20" placeholder="Ej. 100" required class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark">
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs font-semibold text-pastelMuted mb-1">Descripción del trabajo</label>
-                    <textarea id="solDesc" rows="3" required placeholder="Escriba los detalles de lo que requiere hacer en su inmueble..." class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream resize-none"></textarea>
+                    <label class="block text-xs font-semibold text-inkMuted mb-1">Descripción del trabajo</label>
+                    <textarea id="solDesc" rows="3" required placeholder="Escriba los detalles de lo que requiere hacer en su inmueble..." class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark resize-none"></textarea>
                 </div>
-                <button type="submit" class="w-full bg-pastelPeach hover:opacity-90 text-darkBg py-3 rounded-xl font-bold text-xs uppercase tracking-wider">
+                <button type="submit" class="w-full bg-pastelRed hover:opacity-90 text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider shadow-sm">
                     Enviar Solicitud
                 </button>
             </form>
@@ -385,23 +387,23 @@
     </div>
 
     <!-- Modal: Registro de Profesional -->
-    <div id="registroModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-darkCard border border-pastelBorder rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
-            <button onclick="closeModal('registroModal')" class="absolute top-4 right-4 text-pastelMuted hover:text-white">
+    <div id="registroModal" class="fixed inset-0 bg-stone-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-creamCard border border-creamBorder rounded-2xl max-w-lg w-full p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto custom-scrollbar">
+            <button onclick="closeModal('registroModal')" class="absolute top-4 right-4 text-inkMuted hover:text-inkDark">
                 <i class="fa-solid fa-xmark text-xl"></i>
             </button>
-            <h3 class="text-xl font-bold text-pastelCream mb-1">Registro de Maestro / Técnico</h3>
-            <p class="text-xs text-pastelMuted mb-4">Súmese a ConectaTrabajo y reciba solicitudes directas en su ciudad.</p>
+            <h3 class="text-xl font-bold text-inkDark mb-1">Registro de Maestro / Técnico</h3>
+            <p class="text-xs text-inkMuted mb-4">Súmese a ConectaTrabajo y reciba solicitudes directas en su ciudad.</p>
             
             <form onsubmit="submitRegistro(event)" class="space-y-3">
                 <div>
-                    <label class="block text-xs text-pastelMuted mb-1">Nombre completo</label>
-                    <input type="text" required placeholder="Ej. Pedro Luis Mamani" class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                    <label class="block text-xs text-inkMuted mb-1 font-medium">Nombre completo</label>
+                    <input type="text" required placeholder="Ej. Pedro Luis Mamani" class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark">
                 </div>
                 <div class="grid grid-cols-2 gap-3">
                     <div>
-                        <label class="block text-xs text-pastelMuted mb-1">Especialidad</label>
-                        <select required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                        <label class="block text-xs text-inkMuted mb-1 font-medium">Especialidad</label>
+                        <select required class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark">
                             <option value="Electricista">Electricista</option>
                             <option value="Plomero / Gasfíter">Plomero / Gasfíter</option>
                             <option value="Técnico de Línea Blanca">Técnico de Línea Blanca</option>
@@ -414,8 +416,8 @@
                         </select>
                     </div>
                     <div>
-                        <label class="block text-xs text-pastelMuted mb-1">Ciudad Base</label>
-                        <select required class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                        <label class="block text-xs text-inkMuted mb-1 font-medium">Ciudad Base</label>
+                        <select required class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark">
                             <option value="Cochabamba">Cochabamba</option>
                             <option value="Santa Cruz">Santa Cruz</option>
                             <option value="La Paz">La Paz</option>
@@ -428,14 +430,14 @@
                     </div>
                 </div>
                 <div>
-                    <label class="block text-xs text-pastelMuted mb-1">Número de WhatsApp</label>
-                    <input type="tel" required placeholder="Ej. 71234567" class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                    <label class="block text-xs text-inkMuted mb-1 font-medium">Número de WhatsApp</label>
+                    <input type="tel" required placeholder="Ej. 71234567" class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark">
                 </div>
                 <div>
-                    <label class="block text-xs text-pastelMuted mb-1">Número de Carnet de Identidad (Para Verificación)</label>
-                    <input type="text" required placeholder="Ej. 6543210 CB" class="w-full bg-darkBg border border-pastelBorder rounded-xl p-2.5 text-xs text-pastelCream">
+                    <label class="block text-xs text-inkMuted mb-1 font-medium">Número de Carnet de Identidad (Para Verificación)</label>
+                    <input type="text" required placeholder="Ej. 6543210 CB" class="w-full bg-ivoryBg border border-creamBorder rounded-xl p-2.5 text-xs text-inkDark">
                 </div>
-                <button type="submit" class="w-full bg-pastelSage hover:bg-pastelSageHover text-darkBg py-3 rounded-xl font-bold text-xs uppercase tracking-wider mt-2">
+                <button type="submit" class="w-full bg-pastelSage hover:bg-pastelSageHover text-white py-3 rounded-xl font-bold text-xs uppercase tracking-wider mt-2 shadow-sm">
                     Completar Registro
                 </button>
             </form>
@@ -443,44 +445,44 @@
     </div>
 
     <!-- Section How it Works -->
-    <section id="como-funciona" class="bg-darkHeader border-t border-b border-pastelBorder py-16">
+    <section id="como-funciona" class="bg-creamSoft/60 border-t border-b border-creamBorder py-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center max-w-2xl mx-auto mb-12">
-                <h2 class="text-2xl font-extrabold text-pastelCream">¿Cómo funciona la plataforma?</h2>
-                <p class="text-sm text-pastelMuted mt-2">Paso a paso para contratar especialistas o brindar sus servicios en todo el territorio nacional.</p>
+                <h2 class="text-2xl font-extrabold text-inkDark">¿Cómo funciona la plataforma?</h2>
+                <p class="text-sm text-inkMuted mt-2">Paso a paso para contratar especialistas o brindar sus servicios en todo el territorio nacional.</p>
             </div>
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div class="bg-darkBg p-6 rounded-2xl border border-pastelBorder text-center">
-                    <div class="w-12 h-12 rounded-xl bg-pastelSage/15 text-pastelSage flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
-                    <h3 class="text-base font-bold text-pastelCream mb-2">Seleccione Especialista</h3>
-                    <p class="text-xs text-pastelMuted leading-relaxed">Filtre por especialidad, ciudad y tarifa base. Revise las valoraciones y reseñas de otros usuarios.</p>
+                <div class="bg-creamCard p-6 rounded-2xl border border-creamBorder text-center shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-pastelSageLight text-pastelSage flex items-center justify-center text-xl font-bold mx-auto mb-4">1</div>
+                    <h3 class="text-base font-bold text-inkDark mb-2">Seleccione Especialista</h3>
+                    <p class="text-xs text-inkMuted leading-relaxed">Filtre por especialidad, ciudad y tarifa base. Revise las valoraciones y reseñas de otros usuarios.</p>
                 </div>
-                <div class="bg-darkBg p-6 rounded-2xl border border-pastelBorder text-center">
-                    <div class="w-12 h-12 rounded-xl bg-pastelPeach/15 text-pastelPeach flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
-                    <h3 class="text-base font-bold text-pastelCream mb-2">Acuerde por WhatsApp</h3>
-                    <p class="text-xs text-pastelMuted leading-relaxed">Envíe los detalles de su requerimiento directamente al teléfono del especialista sin intermediarios.</p>
+                <div class="bg-creamCard p-6 rounded-2xl border border-creamBorder text-center shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-pastelRedLight text-pastelRed flex items-center justify-center text-xl font-bold mx-auto mb-4">2</div>
+                    <h3 class="text-base font-bold text-inkDark mb-2">Acuerde por WhatsApp</h3>
+                    <p class="text-xs text-inkMuted leading-relaxed">Envíe los detalles de su requerimiento directamente al teléfono del especialista sin intermediarios.</p>
                 </div>
-                <div class="bg-darkBg p-6 rounded-2xl border border-pastelBorder text-center">
-                    <div class="w-12 h-12 rounded-xl bg-pastelGold/15 text-pastelGold flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
-                    <h3 class="text-base font-bold text-pastelCream mb-2">Servicio Realizado</h3>
-                    <p class="text-xs text-pastelMuted leading-relaxed">El técnico acude a su domicilio, realiza la inspección o reparación y usted abona el monto acordado.</p>
+                <div class="bg-creamCard p-6 rounded-2xl border border-creamBorder text-center shadow-sm">
+                    <div class="w-12 h-12 rounded-xl bg-amber-100/70 text-pastelGold flex items-center justify-center text-xl font-bold mx-auto mb-4">3</div>
+                    <h3 class="text-base font-bold text-inkDark mb-2">Servicio Realizado</h3>
+                    <p class="text-xs text-inkMuted leading-relaxed">El técnico acude a su domicilio, realiza la inspección o reparación y usted abona el monto acordado.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-darkHeader py-10 border-t border-pastelBorder text-xs text-pastelMuted">
+    <footer class="bg-creamSoft py-10 border-t border-creamBorder text-xs text-inkMuted">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-4">
             <div class="flex items-center gap-2">
-                <div class="w-7 h-7 rounded-lg bg-pastelSage flex items-center justify-center text-darkBg text-xs font-bold">C</div>
-                <span class="font-bold text-pastelCream">ConectaTrabajo</span> &copy; 2026 - Conectando hogares y profesionales en Bolivia.
+                <div class="w-7 h-7 rounded-lg bg-pastelSage flex items-center justify-center text-white text-xs font-bold">C</div>
+                <span class="font-bold text-inkDark">ConectaTrabajo</span> &copy; 2026 - Conectando hogares y profesionales en Bolivia.
             </div>
             <div class="flex gap-6">
-                <a href="#" class="hover:text-pastelCream transition-colors">Términos de Servicio</a>
-                <a href="#" class="hover:text-pastelCream transition-colors">Política de Privacidad</a>
-                <a href="#" class="hover:text-pastelCream transition-colors">Centro de Ayuda</a>
+                <a href="#" class="hover:text-inkDark transition-colors">Términos de Servicio</a>
+                <a href="#" class="hover:text-inkDark transition-colors">Política de Privacidad</a>
+                <a href="#" class="hover:text-inkDark transition-colors">Centro de Ayuda</a>
             </div>
         </div>
     </footer>
@@ -891,44 +893,44 @@
 
             lista.forEach(p => {
                 const card = document.createElement("div");
-                card.className = "bg-darkCard border border-pastelBorder rounded-2xl overflow-hidden shadow-lg hover:border-pastelSage/60 transition-all duration-300 flex flex-col justify-between group";
+                card.className = "bg-creamCard border border-creamBorder rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-pastelSage transition-all duration-300 flex flex-col justify-between group";
                 
                 const ultimaResena = p.resenas && p.resenas.length > 0 ? p.resenas[0] : null;
 
                 card.innerHTML = `
                     <div>
                         <!-- Header Image & Badge -->
-                        <div class="relative h-48 overflow-hidden bg-darkBg">
+                        <div class="relative h-48 overflow-hidden bg-creamSoft">
                             <img src="${p.foto}" alt="${p.nombre}" onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1581092160562-40aa08e78837?auto=format&fit=crop&w=600&q=80';" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" loading="lazy">
-                            <div class="absolute inset-0 bg-gradient-to-t from-darkCard via-transparent to-transparent"></div>
+                            <div class="absolute inset-0 bg-gradient-to-t from-stone-900/40 via-transparent to-transparent"></div>
                             
                             ${p.verificado ? `
-                                <span class="absolute top-3 left-3 bg-darkBg/90 text-pastelSage text-[10px] font-bold px-2.5 py-1 rounded-full border border-pastelSage/40 backdrop-blur-md flex items-center gap-1 shadow">
+                                <span class="absolute top-3 left-3 bg-creamCard/95 text-pastelSage text-[10px] font-bold px-2.5 py-1 rounded-full border border-pastelSage/30 backdrop-blur-md flex items-center gap-1 shadow-sm">
                                     <i class="fa-solid fa-shield-check"></i> Verificado SEGIP
                                 </span>
                             ` : ''}
 
-                            <span class="absolute top-3 right-3 bg-darkBg/90 text-pastelGold text-xs font-bold px-2.5 py-1 rounded-full border border-pastelBorder backdrop-blur-md flex items-center gap-1">
+                            <span class="absolute top-3 right-3 bg-creamCard/95 text-pastelGold text-xs font-extrabold px-2.5 py-1 rounded-full border border-creamBorder backdrop-blur-md flex items-center gap-1 shadow-sm">
                                 <i class="fa-solid fa-star"></i> ${p.rating}
                             </span>
                         </div>
 
                         <!-- Card Body -->
                         <div class="p-5">
-                            <h3 class="text-lg font-bold text-pastelCream group-hover:text-pastelSage transition-colors">${p.nombre}</h3>
-                            <p class="text-xs font-semibold text-pastelPeach mt-0.5">${p.oficio}</p>
+                            <h3 class="text-lg font-bold text-inkDark group-hover:text-pastelSage transition-colors">${p.nombre}</h3>
+                            <p class="text-xs font-bold text-pastelRed mt-0.5">${p.oficio}</p>
                             
-                            <p class="text-xs text-pastelMuted mt-2 flex items-center gap-1.5">
+                            <p class="text-xs text-inkMuted mt-2 flex items-center gap-1.5 font-medium">
                                 <i class="fa-solid fa-location-dot text-pastelSage"></i> ${p.ciudad} (${p.zona})
                             </p>
 
-                            <p class="text-xs text-pastelMuted/80 line-clamp-2 mt-3 leading-relaxed">
+                            <p class="text-xs text-inkMuted line-clamp-2 mt-3 leading-relaxed">
                                 ${p.desc}
                             </p>
 
                             ${ultimaResena ? `
-                                <div class="mt-3 pt-2.5 border-t border-pastelBorder/50 text-[11px] text-pastelMuted flex items-start gap-2">
-                                    <i class="fa-solid ${ultimaResena.puntaje >= 4 ? 'fa-thumbs-up text-pastelSage' : 'fa-thumbs-down text-pastelPeach'} mt-0.5"></i>
+                                <div class="mt-3 pt-2.5 border-t border-creamBorder text-[11px] text-inkMuted flex items-start gap-2">
+                                    <i class="fa-solid ${ultimaResena.puntaje >= 4 ? 'fa-thumbs-up text-pastelSage' : 'fa-thumbs-down text-pastelRed'} mt-0.5"></i>
                                     <span class="line-clamp-1 italic">"${ultimaResena.comentario}"</span>
                                 </div>
                             ` : ''}
@@ -936,12 +938,12 @@
                     </div>
 
                     <!-- Card Footer -->
-                    <div class="px-5 py-4 bg-darkBg/50 border-t border-pastelBorder/60 flex items-center justify-between mt-2">
+                    <div class="px-5 py-4 bg-ivoryBg/80 border-t border-creamBorder flex items-center justify-between mt-2">
                         <div>
-                            <span class="text-[10px] uppercase font-bold text-pastelMuted block">Visita técnica</span>
-                            <span class="text-sm font-extrabold text-pastelCream">Bs. ${p.precio}</span>
+                            <span class="text-[10px] uppercase font-bold text-inkMuted block">Visita técnica</span>
+                            <span class="text-sm font-extrabold text-inkDark">Bs. ${p.precio}</span>
                         </div>
-                        <button onclick="abrirDetalle(${p.id})" class="bg-pastelSage/15 hover:bg-pastelSage text-pastelSage hover:text-darkBg border border-pastelSage/40 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5">
+                        <button onclick="abrirDetalle(${p.id})" class="bg-pastelSageLight hover:bg-pastelSage text-pastelSage hover:text-white border border-pastelSage/40 px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5">
                             <i class="fa-solid fa-comments text-sm"></i> Ver y Contactar
                         </button>
                     </div>
@@ -961,7 +963,7 @@
             listaEl.innerHTML = "";
 
             if (resenas.length === 0) {
-                listaEl.innerHTML = `<p class="text-xs text-pastelMuted italic">Aún no hay reseñas escritas para este profesional.</p>`;
+                listaEl.innerHTML = `<p class="text-xs text-inkMuted italic">Aún no hay reseñas escritas para este profesional.</p>`;
                 return;
             }
 
@@ -969,20 +971,20 @@
                 const esBuena = r.puntaje >= 4;
                 const estrellas = "★".repeat(r.puntaje) + "☆".repeat(5 - r.puntaje);
                 const item = document.createElement("div");
-                item.className = `p-3 rounded-xl border ${esBuena ? 'bg-pastelSage/5 border-pastelSage/25' : 'bg-pastelPeach/5 border-pastelPeach/25'} text-xs`;
+                item.className = `p-3 rounded-xl border ${esBuena ? 'bg-pastelSageLight/60 border-pastelSage/30' : 'bg-pastelRedLight/60 border-pastelRed/30'} text-xs`;
 
                 item.innerHTML = `
                     <div class="flex items-center justify-between mb-1">
                         <div class="flex items-center gap-2">
-                            <span class="font-bold text-pastelCream">${r.autor}</span>
-                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${esBuena ? 'bg-pastelSage/20 text-pastelSage' : 'bg-pastelPeach/20 text-pastelPeach'}">
+                            <span class="font-bold text-inkDark">${r.autor}</span>
+                            <span class="px-2 py-0.5 rounded-full text-[10px] font-bold ${esBuena ? 'bg-pastelSage/20 text-pastelSage' : 'bg-pastelRed/20 text-pastelRed'}">
                                 ${esBuena ? 'Buen servicio' : 'Mal servicio'}
                             </span>
                         </div>
-                        <span class="text-[10px] text-pastelMuted">${r.fecha}</span>
+                        <span class="text-[10px] text-inkMuted">${r.fecha}</span>
                     </div>
                     <div class="text-pastelGold text-[11px] mb-1">${estrellas}</div>
-                    <p class="text-pastelCream/90 leading-relaxed">${r.comentario}</p>
+                    <p class="text-inkDark leading-relaxed">${r.comentario}</p>
                 `;
                 listaEl.appendChild(item);
             });
